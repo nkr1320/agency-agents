@@ -1,0 +1,11 @@
+{
+  "task_id": "EXAMPLE-MCP-01",
+  "division": "agents",
+  "phase": "build",
+  "signals": [
+    "mcp-401",
+    "oauth-audience-error"
+  ],
+  "already_surfaced_ids": [],
+  "risk_tier": "R1"
+}
