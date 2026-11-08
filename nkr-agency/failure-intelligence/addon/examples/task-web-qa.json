@@ -1,0 +1,11 @@
+{
+  "task_id": "EXAMPLE-WEB-QA-01",
+  "division": "website",
+  "phase": "verify",
+  "signals": [
+    "ci-startup-failure",
+    "missing-test-artifact"
+  ],
+  "already_surfaced_ids": [],
+  "risk_tier": "R1"
+}
