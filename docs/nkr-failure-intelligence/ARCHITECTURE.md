@@ -1,6 +1,6 @@
 # NKR Failure Intelligence Memory (FIM) — Architecture and MVP
 
-**Status (2026-11-08):** Proposed continuous evidence-intelligence system. An **offline, advisory-only demonstration** and 8-source candidate registry with 5 curated seed records are committed in this draft. **No live feed ingestion, database, scheduler, CI integration, incident alerting, runtime policy enforcement or persistent memory service has been installed.** All feeds are intentionally \`enabled:false\` in source-registry.json. This document must not be used to claim an always-on watcher already exists.
+**Status (2026-11-08):** Proposed continuous evidence-intelligence system. An **offline, advisory-only demonstration** and 10-source candidate registry with 5 curated seed records are committed in this draft. **No live feed ingestion, database, scheduler, CI integration, incident alerting, runtime policy enforcement or persistent memory service has been installed.** All feeds are intentionally \`enabled:false\` in source-registry.json. This document must not be used to claim an always-on watcher already exists.
 
 ## 1. Why this is different from a normal agent memory
 
@@ -175,3 +175,7 @@ Use a **before/after controlled benchmark** with held-out historical incidents a
 - Existing NKR failure audit (separate draft PR #4): https://github.com/nkr1320/agency-agents/pull/4
 
 **Warning:** This PR is not a safe substitute for server-enforced security and does not contain live vulnerability claims about any NKR installation.
+
+## Optional FailureGuard pattern add-on
+
+See [FailureGuard add-on documentation](FAILUREGUARD_ADDON.md) for 53 curated failure-pattern triggers (14 MAST modes, 25 proposed PDF fault scenarios and 14 engineering signatures), existing specialist skill references, no-hook CLI and bounded context supplement. The add-on is **OFF by default**, produces only advisory check identifiers, and never alters the enforcement or release gateway. New external feeds remain disabled pending a separately audited ingestion service.
