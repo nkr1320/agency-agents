@@ -1,0 +1,29 @@
+name: NKR Agency Manifest Governance
+
+on:
+  pull_request:
+    paths:
+      - 'nkr-agency/**'
+      - 'docs/nkr-enterprise-agency/**'
+      - 'scripts/nkr_agency_validate.py'
+      - 'tests/test_nkr_agency_validate.py'
+      - '.github/workflows/nkr-agency-validate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  manifest-check:
+    name: Validate policy, 3 divisions and role references
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout PR source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate machine-readable manifests
+        run: python3 scripts/nkr_agency_validate.py
+      - name: Run negative-case regression tests
+        run: python3 -m unittest discover -s tests -p 'test_nkr_agency_validate.py' -v
