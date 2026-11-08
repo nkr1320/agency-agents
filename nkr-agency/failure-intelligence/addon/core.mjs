@@ -38,7 +38,9 @@ export function assessFailureGuard(task, catalog, options = {}) {
   const maxHints = boundedInteger(options.maxHints, LIMITS.defaultHints, 0, LIMITS.maxHints);
   const maxChars = boundedInteger(options.maxChars, LIMITS.defaultChars, 160, LIMITS.maxChars);
   const candidates = [];
-  for (const record of catalog.records.slice(0, 200)) {
+  // Read every record in the reviewed catalog. The previous hard first-200
+  // cap could silently hide relevant lessons appended by future ingestion.
+  for (const record of catalog.records) {
     if (!record || seen.has(record.id) || !Array.isArray(record.phases) || !record.phases.includes(phase) || !Array.isArray(record.signals)) continue;
     const matches = record.signals.filter(s => signals.has(token(s)));
     if (!matches.length || !Array.isArray(record.checks) || !record.checks.length) continue;
