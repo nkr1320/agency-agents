@@ -932,13 +932,14 @@
         "build"
       ],
       "severity": "P1",
-      "remedy": "Check transport, protocol version, server startup stderr and handshake capabilities.",
+      "remedy": "For legacy MCP check initialize handshake; for modern MCP check discover/version metadata, transport and server logs.",
       "checks": [
         "CHECK_MCP_HANDSHAKE"
       ],
       "skill_id": "api",
       "evidence_class": "engineering_design_pattern",
-      "source_note": "Preventive guidance; require real reproduction/verification when used"
+      "source_note": "Protocol families differ; do not assume all versions use initialize handshake",
+      "source_url": "https://modelcontextprotocol.io/specification/draft/changelog"
     },
     {
       "id": "OPS-02",
