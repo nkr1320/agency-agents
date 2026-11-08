@@ -90,6 +90,34 @@ The output is **not executable policy**, and \`estimated_tokens\` is a rough JSO
 
 Task runner should normalize error events into **short predefined signal labels**. It should not feed full untrusted terminal output, chat logs or web content directly into the core evaluator. No match = zero hints.
 
+## Optional context adapter (for the chosen orchestrator or editor)
+
+When a **trusted** task runner receives a new normalized failure signal, it may import the pure JavaScript adapter. This is the actual small "add-on injection" interface; no new agent or hook is installed:
+
+\`\`\`js
+import fs from "node:fs";
+import {makeFailureContextAddon} from "./nkr-agency/failure-intelligence/addon/context-addon.mjs";
+const catalog = JSON.parse(fs.readFileSync(
+  "./nkr-agency/failure-intelligence/addon/failure-patterns.json", "utf8"));
+
+const supplement = makeFailureContextAddon(
+  {phase: "verify", signals: ["ci-startup-failure"], already_surfaced_ids: []},
+  catalog,
+  {enabled: true, maxHints: 2, contextChars: 520}
+);
+
+// Append only if non-empty, after the authoritative task contract.
+// The runner must persist surfaced_ids itself to prevent repetition.
+// Do not run an additional LLM call solely to produce this advisory.
+if (supplement.text) {
+  // yourExistingWorkerContext.append(supplement.text);
+}
+\`\`\`
+
+This adapter is deliberately independent of Paperclip, Orchestrator, Claude Code, Cursor, Antigravity or other IDEs. The *actual chosen manager* will need an adapter to supply normalized task events. That integration is not yet deployed or verified.
+
+Existing Enterprise OS phases \`architecture\` and \`improve\` are mapped internally to \`plan\` and \`operate\` for applicability checks. This does not rename or modify existing task states.
+
 ## Four guardrails preventing disruption
 
 1. **OFF unless explicitly enabled by a trusted caller.** A task JSON field cannot activate it; no global system prompts, editor settings or source hooks are modified.
