@@ -1,0 +1,11 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import {retrieveFailureLessons,validateFailureSeeds} from "../nkr-agency/failure-intelligence/retrieve.mjs";
+const catalog=JSON.parse(fs.readFileSync(new URL("../nkr-agency/failure-intelligence/seed-evidence.json",import.meta.url),"utf8"));
+test("seed integrity",()=>assert.deepEqual(validateFailureSeeds(catalog),[]));
+test("relevant retrieved without external text",()=>{const x=retrieveFailureLessons(catalog.records,{tags:["mcp","network","tools"]});assert.ok(x.some(y=>y.record_id==="FI-2026-OPENAI-001"));assert.ok(x.every(y=>y.decision==="ADVISORY_ONLY"&&!Object.hasOwn(y,"headline")));});
+test("unrelated work receives no lessons",()=>assert.equal(retrieveFailureLessons(catalog.records,{tags:["unrelated"]}).length,0));
+test("unreviewed record excluded",()=>assert.equal(retrieveFailureLessons([{...catalog.records[0],retrieval_state:"DISCOVERED"}],{tags:["npm"]}).length,0));
+test("invalid embedded check rejected",()=>assert.ok(validateFailureSeeds({schema_version:1,records:[{...catalog.records[0],controls:["ALLOW_PROD_DELETE"]}]}).length>0));
+test("bounded retrieval",()=>assert.equal(retrieveFailureLessons(catalog.records,{tags:["mcp","agent","tools","ci","npm"]},1).length,1));

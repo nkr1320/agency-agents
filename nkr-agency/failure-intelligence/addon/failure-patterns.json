@@ -1,0 +1,1234 @@
+{
+  "schema_version": 1,
+  "catalog_version": "2026-11-08-add-on-v1",
+  "default_mode": "DISABLED",
+  "authority": "ADVISORY_ONLY",
+  "confidence_note": "Research modes are not NKR incident rates. PDF qualification scenarios are proposed tests; engineering signatures are preventive patterns. None represent executed protection.",
+  "records": [
+    {
+      "id": "MAST-1.1",
+      "group": "MAST_RESEARCH",
+      "title": "Task specification violation",
+      "signals": [
+        "scope-drift",
+        "unrelated-files",
+        "unauthorized-write"
+      ],
+      "phases": [
+        "build",
+        "review"
+      ],
+      "severity": "P0",
+      "remedy": "Check changed paths and behaviors against the signed task scope; undo unrelated edits.",
+      "checks": [
+        "CHECK_SCOPE_DIFF"
+      ],
+      "skill_id": "reviewer",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-1.2",
+      "group": "MAST_RESEARCH",
+      "title": "Role specification violation",
+      "signals": [
+        "role-drift",
+        "permission-escalation",
+        "tool-role-mismatch"
+      ],
+      "phases": [
+        "dispatch",
+        "build"
+      ],
+      "severity": "P0",
+      "remedy": "Compare tool invocation against the assigned role and resource allowlist; deny excess.",
+      "checks": [
+        "CHECK_ROLE_PERMISSIONS"
+      ],
+      "skill_id": "security",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-1.3",
+      "group": "MAST_RESEARCH",
+      "title": "Step repetition",
+      "signals": [
+        "repeated-tool-call",
+        "retry-loop",
+        "no-progress"
+      ],
+      "phases": [
+        "build",
+        "verify"
+      ],
+      "severity": "P1",
+      "remedy": "Detect identical failed operation signatures; cap retries and escalate with last evidence.",
+      "checks": [
+        "CHECK_RETRY_PROGRESS"
+      ],
+      "skill_id": "ops",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-1.4",
+      "group": "MAST_RESEARCH",
+      "title": "Conversation history lost",
+      "signals": [
+        "context-loss",
+        "summary-mismatch",
+        "missing-constraint"
+      ],
+      "phases": [
+        "plan",
+        "build",
+        "review"
+      ],
+      "severity": "P1",
+      "remedy": "Rehydrate from versioned source scope and original evidence, not just generated summary.",
+      "checks": [
+        "CHECK_SCOPE_REVISION"
+      ],
+      "skill_id": "architect",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-1.5",
+      "group": "MAST_RESEARCH",
+      "title": "Termination condition missed",
+      "signals": [
+        "termination-missed",
+        "runaway-agent",
+        "overbudget"
+      ],
+      "phases": [
+        "build",
+        "operate"
+      ],
+      "severity": "P0",
+      "remedy": "Stop on acceptance, explicit cancellation, time limit or exhausted budget.",
+      "checks": [
+        "CHECK_TERMINATION_GATE"
+      ],
+      "skill_id": "ops",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-2.1",
+      "group": "MAST_RESEARCH",
+      "title": "Conversation reset",
+      "signals": [
+        "checkpoint-missing",
+        "resume-error",
+        "agent-restart"
+      ],
+      "phases": [
+        "dispatch",
+        "build",
+        "operate"
+      ],
+      "severity": "P1",
+      "remedy": "Recover from durable checkpoint and reconcile completed side effects before retry.",
+      "checks": [
+        "CHECK_CHECKPOINT_RECOVERY"
+      ],
+      "skill_id": "architect",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-2.2",
+      "group": "MAST_RESEARCH",
+      "title": "Missing clarification",
+      "signals": [
+        "ambiguous-requirement",
+        "unknown-schema",
+        "missing-permission"
+      ],
+      "phases": [
+        "intake",
+        "plan",
+        "design"
+      ],
+      "severity": "P1",
+      "remedy": "Mark BLOCKED when required facts or permissions are absent; ask accountable owner.",
+      "checks": [
+        "CHECK_REQUIRED_INPUTS"
+      ],
+      "skill_id": "architect",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-2.3",
+      "group": "MAST_RESEARCH",
+      "title": "Task derailment",
+      "signals": [
+        "task-derailment",
+        "unrelated-feature",
+        "scope-creep"
+      ],
+      "phases": [
+        "build",
+        "review"
+      ],
+      "severity": "P1",
+      "remedy": "Compare each deliverable to explicit acceptance criteria and reject unauthorized additions.",
+      "checks": [
+        "CHECK_SCOPE_DIFF"
+      ],
+      "skill_id": "reviewer",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-2.4",
+      "group": "MAST_RESEARCH",
+      "title": "Information withholding",
+      "signals": [
+        "missing-handoff",
+        "undisclosed-error",
+        "hidden-dependency"
+      ],
+      "phases": [
+        "build",
+        "integrate",
+        "review"
+      ],
+      "severity": "P1",
+      "remedy": "Handoff must include known blockers, failing tests and contract changes with source links.",
+      "checks": [
+        "CHECK_HANDOFF_COMPLETENESS"
+      ],
+      "skill_id": "architect",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-2.5",
+      "group": "MAST_RESEARCH",
+      "title": "Ignoring peer input",
+      "signals": [
+        "unresolved-review",
+        "ignored-defect",
+        "ignored-dependency"
+      ],
+      "phases": [
+        "integrate",
+        "verify",
+        "review"
+      ],
+      "severity": "P1",
+      "remedy": "Block downstream gate while required review comments or defects remain unresolved.",
+      "checks": [
+        "CHECK_DEPENDENCY_GATES"
+      ],
+      "skill_id": "qa",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-2.6",
+      "group": "MAST_RESEARCH",
+      "title": "Reasoning-action mismatch",
+      "signals": [
+        "tool-log-mismatch",
+        "false-tool-success",
+        "action-mismatch"
+      ],
+      "phases": [
+        "build",
+        "verify",
+        "review"
+      ],
+      "severity": "P0",
+      "remedy": "Compare narrative claims with trusted tool logs, diff, and observed external state.",
+      "checks": [
+        "CHECK_ACTION_ATTESTATION"
+      ],
+      "skill_id": "evidence",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-3.1",
+      "group": "MAST_RESEARCH",
+      "title": "Premature termination",
+      "signals": [
+        "premature-completion",
+        "missing-acceptance",
+        "unfinished-job"
+      ],
+      "phases": [
+        "verify",
+        "review",
+        "release"
+      ],
+      "severity": "P0",
+      "remedy": "Do not mark done until every mandatory acceptance test and artifact exists.",
+      "checks": [
+        "CHECK_COMPLETION_EVIDENCE"
+      ],
+      "skill_id": "qa",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-3.2",
+      "group": "MAST_RESEARCH",
+      "title": "Incomplete verification",
+      "signals": [
+        "missing-regression",
+        "not-tested",
+        "test-skipped"
+      ],
+      "phases": [
+        "verify",
+        "review"
+      ],
+      "severity": "P0",
+      "remedy": "Generate and execute missing unit, integration, negative and domain-specific cases.",
+      "checks": [
+        "CHECK_TEST_COVERAGE"
+      ],
+      "skill_id": "qa",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "MAST-3.3",
+      "group": "MAST_RESEARCH",
+      "title": "Incorrect verification",
+      "signals": [
+        "false-pass",
+        "bad-oracle",
+        "invalid-test"
+      ],
+      "phases": [
+        "verify",
+        "review"
+      ],
+      "severity": "P0",
+      "remedy": "Review test assertions against independent ground truth and observable final state.",
+      "checks": [
+        "CHECK_TEST_ORACLE"
+      ],
+      "skill_id": "qa",
+      "source_url": "https://arxiv.org/abs/2503.13657",
+      "evidence_class": "research_taxonomy",
+      "source_note": "MAST publication; mitigation is NKR engineering proposal"
+    },
+    {
+      "id": "PDF-F01",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Duplicate assignment",
+      "signals": [
+        "duplicate-claim",
+        "lease-conflict"
+      ],
+      "phases": [
+        "dispatch",
+        "build"
+      ],
+      "severity": "P0",
+      "remedy": "Use atomic claim and fenced lease tokens; only one task owner proceeds.",
+      "checks": [
+        "CHECK_ATOMIC_LEASE"
+      ],
+      "skill_id": "architect",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F02",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Lock never released",
+      "signals": [
+        "lock-stuck",
+        "worker-crash",
+        "lease-expired"
+      ],
+      "phases": [
+        "dispatch",
+        "build",
+        "integrate"
+      ],
+      "severity": "P0",
+      "remedy": "Make lease expiry and resource cleanup deterministic, outside worker reasoning.",
+      "checks": [
+        "CHECK_LEASE_CLEANUP"
+      ],
+      "skill_id": "ops",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F03",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Silent truncated handoff",
+      "signals": [
+        "truncated-handoff",
+        "missing-invariant",
+        "semantic-omission"
+      ],
+      "phases": [
+        "integrate",
+        "review"
+      ],
+      "severity": "P0",
+      "remedy": "Verify mandatory fields against immutable source and acknowledge sequence/revision.",
+      "checks": [
+        "CHECK_HANDOFF_INVARIANTS"
+      ],
+      "skill_id": "architect",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F04",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Stale message replay",
+      "signals": [
+        "stale-replay",
+        "old-handoff",
+        "sequence-regression"
+      ],
+      "phases": [
+        "dispatch",
+        "integrate"
+      ],
+      "severity": "P0",
+      "remedy": "Reject outdated scope revisions and sequence IDs before admitting context.",
+      "checks": [
+        "CHECK_MESSAGE_FRESHNESS"
+      ],
+      "skill_id": "architect",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F05",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Changed scope while worker runs",
+      "signals": [
+        "stale-scope",
+        "changed-requirement",
+        "base-sha-mismatch"
+      ],
+      "phases": [
+        "build",
+        "integrate"
+      ],
+      "severity": "P0",
+      "remedy": "Invalidate old task contract and rebase work against approved current revision.",
+      "checks": [
+        "CHECK_SCOPE_REVISION"
+      ],
+      "skill_id": "architect",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F06",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Prompt injection through GitHub MCP",
+      "signals": [
+        "mcp-prompt-injection",
+        "untrusted-issue",
+        "private-repo-exposure"
+      ],
+      "phases": [
+        "research",
+        "build",
+        "review"
+      ],
+      "severity": "P0",
+      "remedy": "Isolate untrusted issue reading from private repo credentials and outbound writes.",
+      "checks": [
+        "CHECK_MCP_TRUST_BOUNDARY"
+      ],
+      "skill_id": "security",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F07",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Poisoned MCP tool description",
+      "signals": [
+        "mcp-tool-poisoning",
+        "tool-description-injection",
+        "ssh-key-request"
+      ],
+      "phases": [
+        "dispatch",
+        "build"
+      ],
+      "severity": "P0",
+      "remedy": "Deny external credential access, validate tool identity and quarantine suspicious descriptors.",
+      "checks": [
+        "CHECK_MCP_TOOL_PROVENANCE"
+      ],
+      "skill_id": "security",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F08",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Unauthorized inter-worker communication",
+      "signals": [
+        "peer-side-channel",
+        "shared-cache-write",
+        "unauthorized-network"
+      ],
+      "phases": [
+        "dispatch",
+        "build",
+        "operate"
+      ],
+      "severity": "P0",
+      "remedy": "Apply task-scoped egress and shared-state isolation; alert on unexpected peers.",
+      "checks": [
+        "CHECK_PEER_EGRESS"
+      ],
+      "skill_id": "security",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F09",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Forged test evidence",
+      "signals": [
+        "forged-test-log",
+        "false-pass",
+        "oracle-tamper"
+      ],
+      "phases": [
+        "verify",
+        "review",
+        "release"
+      ],
+      "severity": "P0",
+      "remedy": "Accept verdicts only from protected runner bound to exact source/artifact digest.",
+      "checks": [
+        "CHECK_TRUSTED_TEST_RESULT"
+      ],
+      "skill_id": "evidence",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F10",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Fabricated tool-call transcript",
+      "signals": [
+        "tool-call-spoof",
+        "action-mismatch",
+        "false-tool-success"
+      ],
+      "phases": [
+        "verify",
+        "review"
+      ],
+      "severity": "P0",
+      "remedy": "Reconcile agent narrative with trusted proxy event IDs and actual state.",
+      "checks": [
+        "CHECK_ACTION_ATTESTATION"
+      ],
+      "skill_id": "evidence",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F11",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "API contract collision",
+      "signals": [
+        "api-contract-break",
+        "schema-conflict",
+        "integration-conflict"
+      ],
+      "phases": [
+        "integrate",
+        "verify"
+      ],
+      "severity": "P0",
+      "remedy": "Use a single contract owner, schema diff checks and integrated regression tests.",
+      "checks": [
+        "CHECK_API_CONTRACT"
+      ],
+      "skill_id": "api",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F12",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Staging worker accesses production credential",
+      "signals": [
+        "prod-token-exposed",
+        "secret-in-worktree",
+        "staging-prod-crossing"
+      ],
+      "phases": [
+        "dispatch",
+        "build"
+      ],
+      "severity": "P0",
+      "remedy": "Quarantine workspace; remove ambient production secrets; deny production API reachability.",
+      "checks": [
+        "CHECK_SECRET_ISOLATION"
+      ],
+      "skill_id": "security",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F13",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Deceptive destructive approval",
+      "signals": [
+        "terraform-destroy",
+        "wrong-cloud-account",
+        "unsafe-approval"
+      ],
+      "phases": [
+        "review",
+        "release"
+      ],
+      "severity": "P0",
+      "remedy": "Present resolved account/resources/deletions/backups to human; require scoped approval.",
+      "checks": [
+        "CHECK_RESOLVED_IMPACT"
+      ],
+      "skill_id": "devops",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F14",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Code freeze bypass",
+      "signals": [
+        "code-freeze",
+        "unexpected-prod-write",
+        "freeze-violation"
+      ],
+      "phases": [
+        "build",
+        "release"
+      ],
+      "severity": "P0",
+      "remedy": "Revoke write authority during freeze at server-side tool and deployment gateway.",
+      "checks": [
+        "CHECK_CODE_FREEZE"
+      ],
+      "skill_id": "security",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F15",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Crash followed by duplicate external write",
+      "signals": [
+        "duplicate-payment",
+        "duplicate-email",
+        "ambiguous-timeout"
+      ],
+      "phases": [
+        "build",
+        "operate"
+      ],
+      "severity": "P0",
+      "remedy": "Reconcile external state and use idempotency key before any retry.",
+      "checks": [
+        "CHECK_EXTERNAL_IDEMPOTENCY"
+      ],
+      "skill_id": "api",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F16",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Concurrent cost runaway",
+      "signals": [
+        "budget-exceeded",
+        "retry-storm",
+        "token-spike"
+      ],
+      "phases": [
+        "dispatch",
+        "build",
+        "operate"
+      ],
+      "severity": "P0",
+      "remedy": "Reserve in-flight spend and stop new calls on hard ceiling; reconcile delayed usage.",
+      "checks": [
+        "CHECK_BUDGET_RESERVATION"
+      ],
+      "skill_id": "ops",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F17",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Backups deleted with production data",
+      "signals": [
+        "backup-missing",
+        "recovery-drill",
+        "data-loss"
+      ],
+      "phases": [
+        "review",
+        "release",
+        "operate"
+      ],
+      "severity": "P0",
+      "remedy": "Require independently protected backup and tested restore objectives.",
+      "checks": [
+        "CHECK_OFFSITE_RESTORE"
+      ],
+      "skill_id": "ops",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F18",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Artifact changed after verification",
+      "signals": [
+        "artifact-mismatch",
+        "post-test-change",
+        "source-sha-drift"
+      ],
+      "phases": [
+        "review",
+        "release"
+      ],
+      "severity": "P0",
+      "remedy": "Compare tested artifact digest with release target; reject mismatches.",
+      "checks": [
+        "CHECK_ARTIFACT_BINDING"
+      ],
+      "skill_id": "evidence",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F19",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Persistent memory poisoning",
+      "signals": [
+        "memory-poisoning",
+        "sleeper-instruction",
+        "distributed-injection"
+      ],
+      "phases": [
+        "research",
+        "plan",
+        "build"
+      ],
+      "severity": "P0",
+      "remedy": "Preserve data origin/trust; review combined retrieval context and refuse authority upgrades.",
+      "checks": [
+        "CHECK_MEMORY_PROVENANCE"
+      ],
+      "skill_id": "security",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F20",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Context compaction injection",
+      "signals": [
+        "compaction-injection",
+        "summary-policy-override",
+        "context-loss"
+      ],
+      "phases": [
+        "plan",
+        "build"
+      ],
+      "severity": "P0",
+      "remedy": "Never let summaries override immutable organizational policy or scoped credentials.",
+      "checks": [
+        "CHECK_SCOPE_REVISION"
+      ],
+      "skill_id": "architect",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F21",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Untrusted skill execution",
+      "signals": [
+        "skill-poisoning",
+        "unverified-skill",
+        "unreviewed-hook"
+      ],
+      "phases": [
+        "dispatch",
+        "build"
+      ],
+      "severity": "P0",
+      "remedy": "Verify pinned skill source/license/hooks in sandbox; require promotion approval.",
+      "checks": [
+        "CHECK_SKILL_PROVENANCE"
+      ],
+      "skill_id": "security",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F22",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Malicious dependency install script",
+      "signals": [
+        "malicious-postinstall",
+        "untrusted-install-script",
+        "supply-chain"
+      ],
+      "phases": [
+        "build",
+        "verify"
+      ],
+      "severity": "P0",
+      "remedy": "Inspect resolved dependencies and install scripts in credential-free sandbox.",
+      "checks": [
+        "CHECK_INSTALL_SCRIPTS"
+      ],
+      "skill_id": "devops",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F23",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Cross-customer data exposure",
+      "signals": [
+        "cross-tenant",
+        "tenant-id-mismatch",
+        "private-context-leak"
+      ],
+      "phases": [
+        "dispatch",
+        "build",
+        "verify",
+        "operate"
+      ],
+      "severity": "P0",
+      "remedy": "Test tenant identity at DB, artifact and retrieval boundaries; deny all cross-tenant access.",
+      "checks": [
+        "CHECK_TENANT_ISOLATION"
+      ],
+      "skill_id": "privacy",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F24",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Emergency stop ineffective",
+      "signals": [
+        "kill-switch-failure",
+        "worker-cancellation",
+        "revocation-failed"
+      ],
+      "phases": [
+        "dispatch",
+        "build",
+        "operate"
+      ],
+      "severity": "P0",
+      "remedy": "Terminate runs and revoke credentials out of band; verify no late side effects.",
+      "checks": [
+        "CHECK_KILL_SWITCH"
+      ],
+      "skill_id": "ops",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "PDF-F25",
+      "group": "PDF_FAULT_SCENARIO",
+      "title": "Unavailable device or contradictory test",
+      "signals": [
+        "device-unavailable",
+        "emulator-hang",
+        "impossible-test"
+      ],
+      "phases": [
+        "verify",
+        "review"
+      ],
+      "severity": "P1",
+      "remedy": "Block on environment/test contradiction; do not fake passes; escalate with evidence.",
+      "checks": [
+        "CHECK_TEST_FEASIBILITY"
+      ],
+      "skill_id": "mobile",
+      "source_ref": "High-Reliability Multi-Agent Architecture.pdf, pages 35-41",
+      "evidence_class": "proposed_qualification_test",
+      "source_note": "Scenario defined in user-supplied PDF; not evidence this safeguard works"
+    },
+    {
+      "id": "OPS-01",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "MCP handshake failure",
+      "signals": [
+        "mcp-handshake-failed",
+        "mcp-connect-failed",
+        "mcp-initialize-error"
+      ],
+      "phases": [
+        "dispatch",
+        "build"
+      ],
+      "severity": "P1",
+      "remedy": "For legacy MCP check initialize handshake; for modern MCP check discover/version metadata, transport and server logs.",
+      "checks": [
+        "CHECK_MCP_HANDSHAKE"
+      ],
+      "skill_id": "api",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Protocol families differ; do not assume all versions use initialize handshake",
+      "source_url": "https://modelcontextprotocol.io/specification/draft/changelog"
+    },
+    {
+      "id": "OPS-02",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "MCP authentication failed",
+      "signals": [
+        "mcp-401",
+        "mcp-403",
+        "oauth-audience-error"
+      ],
+      "phases": [
+        "dispatch",
+        "build"
+      ],
+      "severity": "P0",
+      "remedy": "Verify token audience/scope/expiry and server authorization; never search unrelated secrets.",
+      "checks": [
+        "CHECK_MCP_AUTH_SCOPE"
+      ],
+      "skill_id": "security",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-03",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "MCP tool schema drift",
+      "signals": [
+        "mcp-schema-mismatch",
+        "mcp-tool-not-found",
+        "mcp-version-mismatch"
+      ],
+      "phases": [
+        "dispatch",
+        "build",
+        "verify"
+      ],
+      "severity": "P1",
+      "remedy": "Refresh pinned schema and run typed compatibility test before choosing another tool.",
+      "checks": [
+        "CHECK_MCP_TOOL_SCHEMA"
+      ],
+      "skill_id": "api",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-04",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "MCP timeout and retry uncertainty",
+      "signals": [
+        "mcp-timeout",
+        "tool-timeout",
+        "unknown-tool-outcome"
+      ],
+      "phases": [
+        "build",
+        "operate"
+      ],
+      "severity": "P0",
+      "remedy": "Check tool idempotency and actual state before any retry; cap attempts.",
+      "checks": [
+        "CHECK_EXTERNAL_IDEMPOTENCY"
+      ],
+      "skill_id": "api",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-05",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "Wrong MCP tool selected",
+      "signals": [
+        "wrong-tool-selected",
+        "tool-ambiguity",
+        "tool-routing-error"
+      ],
+      "phases": [
+        "dispatch",
+        "build"
+      ],
+      "severity": "P1",
+      "remedy": "Match intent to tool contract and granted permissions, then validate returned outcome.",
+      "checks": [
+        "CHECK_TOOL_SELECTION"
+      ],
+      "skill_id": "agent",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-06",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "Dependency resolution failure",
+      "signals": [
+        "npm-eresolve",
+        "dependency-conflict",
+        "peer-dependency-error"
+      ],
+      "phases": [
+        "build",
+        "verify"
+      ],
+      "severity": "P1",
+      "remedy": "Inspect lockfile and peer constraints; avoid force flags and unreviewed upgrades.",
+      "checks": [
+        "CHECK_DEPENDENCY_LOCK"
+      ],
+      "skill_id": "devops",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-07",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "Missing import or compiler module",
+      "signals": [
+        "err_module_not_found",
+        "module-not-found",
+        "import-resolution-fail"
+      ],
+      "phases": [
+        "build",
+        "verify"
+      ],
+      "severity": "P1",
+      "remedy": "Resolve declared package/alias paths and rerun the same compile/test command.",
+      "checks": [
+        "CHECK_BUILD_RESOLUTION"
+      ],
+      "skill_id": "qa",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-08",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "Type check or build failure",
+      "signals": [
+        "typecheck-failed",
+        "ts2322",
+        "compile-failed"
+      ],
+      "phases": [
+        "build",
+        "verify"
+      ],
+      "severity": "P1",
+      "remedy": "Fix typed contract mismatch; rerun build and affected tests with original options.",
+      "checks": [
+        "CHECK_BUILD_TYPES"
+      ],
+      "skill_id": "qa",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-09",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "CI workflow fails before job steps",
+      "signals": [
+        "ci-startup-failure",
+        "ci-job-not-started",
+        "workflow-unavailable"
+      ],
+      "phases": [
+        "verify",
+        "review",
+        "release"
+      ],
+      "severity": "P0",
+      "remedy": "Inspect runner, permissions, workflow syntax and billing/status; never claim tests passed.",
+      "checks": [
+        "CHECK_CI_HEALTH"
+      ],
+      "skill_id": "devops",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-10",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "Flaky test masks regression",
+      "signals": [
+        "flaky-test",
+        "intermittent-failure",
+        "random-test"
+      ],
+      "phases": [
+        "verify",
+        "review"
+      ],
+      "severity": "P1",
+      "remedy": "Record seeds and environment; isolate flake from real regression; repeat before signoff.",
+      "checks": [
+        "CHECK_TEST_FLAKINESS"
+      ],
+      "skill_id": "qa",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-11",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "QA test passes wrong assertion",
+      "signals": [
+        "bad-assertion",
+        "false-green",
+        "test-mocks-production"
+      ],
+      "phases": [
+        "verify",
+        "review"
+      ],
+      "severity": "P0",
+      "remedy": "Verify actual observable behavior and independently review assertion/fixtures.",
+      "checks": [
+        "CHECK_TEST_ORACLE"
+      ],
+      "skill_id": "qa",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-12",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "API integration contract rejected",
+      "signals": [
+        "http-422",
+        "http-409",
+        "api-schema-violation"
+      ],
+      "phases": [
+        "integrate",
+        "verify"
+      ],
+      "severity": "P1",
+      "remedy": "Validate request/response schema, version and side-effect expectations before change.",
+      "checks": [
+        "CHECK_API_CONTRACT"
+      ],
+      "skill_id": "api",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-13",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "Android build and emulator failure",
+      "signals": [
+        "gradle-build-failed",
+        "android-emulator-unavailable",
+        "device-test-failed"
+      ],
+      "phases": [
+        "build",
+        "verify"
+      ],
+      "severity": "P1",
+      "remedy": "Inspect build toolchain, target SDK and emulator/device logs; keep release blocked.",
+      "checks": [
+        "CHECK_MOBILE_DEVICE"
+      ],
+      "skill_id": "mobile",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    },
+    {
+      "id": "OPS-14",
+      "group": "ENGINEERING_FAILURE_PATTERN",
+      "title": "Evidence report missing or stale",
+      "signals": [
+        "missing-trace",
+        "missing-test-artifact",
+        "stale-build-evidence"
+      ],
+      "phases": [
+        "verify",
+        "review",
+        "release"
+      ],
+      "severity": "P0",
+      "remedy": "Run the authorized test and attach runner ID plus artifact SHA, not model prose.",
+      "checks": [
+        "CHECK_COMPLETION_EVIDENCE"
+      ],
+      "skill_id": "evidence",
+      "evidence_class": "engineering_design_pattern",
+      "source_note": "Preventive guidance; require real reproduction/verification when used"
+    }
+  ]
+}

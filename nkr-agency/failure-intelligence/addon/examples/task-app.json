@@ -1,0 +1,10 @@
+{
+  "task_id": "EXAMPLE-MOBILE-01",
+  "division": "app",
+  "phase": "verify",
+  "signals": [
+    "android-emulator-unavailable",
+    "device-test-failed"
+  ],
+  "risk_tier": "R1"
+}

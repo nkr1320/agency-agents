@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "disclaimer": "Curated illustrative evidence references, NOT a complete live feed. Matching only produces advisory check IDs. No production policy rules or automated actions.",
+  "records": [
+    {
+      "id": "FI-2025-NX-001",
+      "headline": "Nx malicious package publication via CI publishing token compromise",
+      "source_id": "nx-vendor-incident",
+      "source_url": "https://nx.dev/blog/s1ngularity-postmortem",
+      "source_class": "vendor-postmortem",
+      "event_time": "2025-08-26",
+      "retrieval_state": "CURATED_EVIDENCE",
+      "categories": [
+        "supply-chain",
+        "secrets",
+        "ci"
+      ],
+      "tags": [
+        "npm",
+        "dependency",
+        "build",
+        "ci",
+        "supply-chain",
+        "credentials"
+      ],
+      "controls": [
+        "CHECK_DEPENDENCY_VERSIONS",
+        "CHECK_INSTALL_SCRIPTS",
+        "CHECK_SCOPED_CREDENTIALS"
+      ],
+      "limit": "Do not infer every Nx version is affected; check actual resolved versions and advisory.",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "FI-2026-OPENAI-001",
+      "headline": "Agent evaluations exceeded task boundaries through unauthorized communication and infrastructure access",
+      "source_id": "openai-official",
+      "source_url": "https://openai.com/index/hugging-face-incident-and-the-road-ahead/",
+      "source_class": "vendor-acknowledged-incident",
+      "event_time": "2026-07",
+      "retrieval_state": "CURATED_EVIDENCE",
+      "categories": [
+        "coordination",
+        "permission",
+        "isolation"
+      ],
+      "tags": [
+        "agent",
+        "orchestration",
+        "peer-communication",
+        "mcp",
+        "network",
+        "tools",
+        "sandbox"
+      ],
+      "controls": [
+        "CHECK_EGRESS_RESTRICTIONS",
+        "CHECK_PEER_COMMUNICATION",
+        "CHECK_TOOL_PERMISSIONS"
+      ],
+      "limit": "Incident involved specialized internal evaluations; do not generalize an observed frequency to ordinary production agents.",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "FI-2026-OWASP-001",
+      "headline": "Agentic AI security threat taxonomy including tool misuse, goal hijacking and memory poisoning",
+      "source_id": "owasp-agentic",
+      "source_url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+      "source_class": "community-security-framework",
+      "event_time": "2025-12",
+      "retrieval_state": "CURATED_EVIDENCE",
+      "categories": [
+        "memory",
+        "prompt-injection",
+        "security"
+      ],
+      "tags": [
+        "agent",
+        "mcp",
+        "memory",
+        "context",
+        "tool",
+        "prompt-injection",
+        "orchestration"
+      ],
+      "controls": [
+        "CHECK_TAINTED_CONTEXT",
+        "CHECK_TOOL_PERMISSIONS",
+        "CHECK_INDEPENDENT_EVIDENCE"
+      ],
+      "limit": "Risk taxonomy, not a single confirmed exploitation incident.",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "FI-2026-MCP-001",
+      "headline": "MCP protocol update changes authorization, SDK and protocol behavior",
+      "source_id": "mcp-spec",
+      "source_url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+      "source_class": "official-protocol-release",
+      "event_time": "2026-07-28",
+      "retrieval_state": "CURATED_EVIDENCE",
+      "categories": [
+        "compatibility",
+        "mcp"
+      ],
+      "tags": [
+        "mcp",
+        "connector",
+        "tool",
+        "protocol",
+        "sdk"
+      ],
+      "controls": [
+        "CHECK_MCP_VERSION_COMPAT",
+        "CHECK_MCP_AUTH_SCOPE",
+        "CHECK_TOOL_SCHEMA"
+      ],
+      "limit": "Release note is not evidence of an incident or that a given installed MCP server is vulnerable.",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "FI-NKR-CI-2026-001",
+      "headline": "NKR governance PR CI checks observed failing before normal job steps",
+      "source_id": "nkr-internal",
+      "source_url": "https://github.com/nkr1320/agency-agents/pull/4",
+      "source_class": "observed-repository-workflow",
+      "event_time": "2026-11-08",
+      "retrieval_state": "CURATED_EVIDENCE",
+      "categories": [
+        "ci",
+        "qa",
+        "evidence"
+      ],
+      "tags": [
+        "ci",
+        "github-actions",
+        "workflow",
+        "release",
+        "qa"
+      ],
+      "controls": [
+        "CHECK_CI_RUN_STARTED",
+        "CHECK_TRUSTED_TEST_RESULTS",
+        "CHECK_RELEASE_GATE"
+      ],
+      "limit": "Snapshot of reported workflow state, not proof of a persistent outage; recheck actual runs.",
+      "status": "ACTIVE"
+    }
+  ]
+}
