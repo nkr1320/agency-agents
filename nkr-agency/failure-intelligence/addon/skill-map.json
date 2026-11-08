@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "activation_policy": "OPTIONAL_INSTRUCTION_REFERENCES_ONLY",
+  "statement": "These role files already exist in the NKR Agency Agents fork; they are not currently running agents or approved active tools.",
+  "skills": [
+    {
+      "id": "architect",
+      "ref": "engineering/engineering-multi-agent-systems-architect.md",
+      "purpose": "Task DAGs, resource ownership, context and workflow design",
+      "source": "nkr1320/agency-agents",
+      "runtime_enabled": false,
+      "security_qualification": "NOT_RUN"
+    },
+    {
+      "id": "reviewer",
+      "ref": "engineering/engineering-code-reviewer.md",
+      "purpose": "Independent diff and change-risk review",
+      "source": "nkr1320/agency-agents",
+      "runtime_enabled": false,
+      "security_qualification": "NOT_RUN"
+    },
+    {
+      "id": "qa",
+      "ref": "testing/testing-test-automation-engineer.md",
+      "purpose": "Executed tests, regression and test-runner design",
+      "source": "nkr1320/agency-agents",
+      "runtime_enabled": false,
+      "security_qualification": "NOT_RUN"
+    },
+    {
+      "id": "evidence",
+      "ref": "testing/testing-evidence-collector.md",
+      "purpose": "Verify traces, screenshots and artifact provenance",
+      "source": "nkr1320/agency-agents",
+      "runtime_enabled": false,
+      "security_qualification": "NOT_RUN"
+    },
+    {
+      "id": "api",
+      "ref": "testing/testing-api-tester.md",
+      "purpose": "API, connector and tool-schema compatibility",
+      "source": "nkr1320/agency-agents",
+      "runtime_enabled": false,
+      "security_qualification": "NOT_RUN"
+    },
+    {
+      "id": "security",
+      "ref": "security/security-appsec-engineer.md",
+      "purpose": "Security boundaries, supply chain and secret handling",
+      "source": "nkr1320/agency-agents",
+      "runtime_enabled": false,
+      "security_qualification": "NOT_RUN"
+    },
+    {
+      "id": "privacy",
+      "ref": "engineering/engineering-privacy-engineer.md",
+      "purpose": "Sensitive information boundaries and tenant isolation",
+      "source": "nkr1320/agency-agents",
+      "runtime_enabled": false,
+      "security_qualification": "NOT_RUN"
+    },
+    {
+      "id": "devops",
+      "ref": "engineering/engineering-devops-automator.md",
+      "purpose": "Build, CI, infrastructure and deployment controls",
+      "source": "nkr1320/agency-agents",
+      "runtime_enabled": false,
+      "security_qualification": "NOT_RUN"
+    },
+    {
+      "id": "mobile",
+      "ref": "engineering/engineering-mobile-app-builder.md",
+      "purpose": "Native and cross-platform mobile build and compatibility",
+      "source": "nkr1320/agency-agents",
+      "runtime_enabled": false,
+      "security_qualification": "NOT_RUN"
+    },
+    {
+      "id": "agent",
+      "ref": "engineering/engineering-ai-engineer.md",
+      "purpose": "AI agent workflow and integration development",
+      "source": "nkr1320/agency-agents",
+      "runtime_enabled": false,
+      "security_qualification": "NOT_RUN"
+    },
+    {
+      "id": "ops",
+      "ref": "engineering/engineering-sre.md",
+      "purpose": "Reliability, monitoring, incident handling and recovery",
+      "source": "nkr1320/agency-agents",
+      "runtime_enabled": false,
+      "security_qualification": "NOT_RUN"
+    }
+  ]
+}
