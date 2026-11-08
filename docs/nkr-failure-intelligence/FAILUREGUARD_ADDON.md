@@ -118,6 +118,32 @@ This adapter is deliberately independent of Paperclip, Orchestrator, Claude Code
 
 Existing Enterprise OS phases `architecture` and `improve` are mapped internally to `plan` and `operate` for applicability checks. This does not rename or modify existing task states.
 
+## Event-driven adapter — no error-reading LLM needed
+
+The new [event adapter](../../nkr-agency/failure-intelligence/addon/event-adapter.mjs) accepts **authenticated and normalized runner events** from the future authoritative manager. It recognizes 15 fixed machine error codes, MCP HTTP 401/403, and CI startup failures. It deliberately ignores arbitrary error messages, successful events, unknown event types and mismatched phases.
+
+```js
+import {adviseForVerifiedEvent} from "./nkr-agency/failure-intelligence/addon/event-adapter.mjs";
+
+// trustedSource:true is set ONLY after your server has authenticated
+// the actual runner and tenant; this flag does NOT authenticate by itself.
+const advisory = adviseForVerifiedEvent(
+  {kind:"mcp.error", outcome:"FAIL", phase:"build", http_status:401},
+  reviewedCatalog,
+  {enabled:featureFlags.failureGuard, trustedSource:authenticatedRunnerVerified}
+);
+
+// No extra model call. Append only when text exists and is relevant.
+if (advisory.text) {
+  // existingWorkerTaskContext.append(advisory.text);
+  // authoritativeTaskStore.markSurfaced(advisory.surfaced_ids);
+}
+```
+
+The adapter does **not** connect to Paperclip, Orchestrator or any editor automatically. The trusted caller must verify event signatures/identity, customer scope, replay/sequence, task permission and source SHA before invoking it.
+
+**Evidence:** See [isolated verification snapshot](ISOLATED_VERIFICATION_SNAPSHOT.md): 40 committed test cases passed in a restricted V8 test harness, plus a local microbenchmark. Actual Node CLI/CI remains unverified and must be executed before merging.
+
 ## Four guardrails preventing disruption
 
 1. **OFF unless explicitly enabled by a trusted caller.** A task JSON field cannot activate it; no global system prompts, editor settings or source hooks are modified.
