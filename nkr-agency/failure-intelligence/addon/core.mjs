@@ -27,7 +27,9 @@ export function assessFailureGuard(task, catalog, options = {}) {
   if (options.enabled !== true) return empty("DISABLED");
   if (!task || typeof task !== "object" || Array.isArray(task)) return empty("INVALID_TASK");
   if (!catalog || catalog.schema_version !== 1 || !Array.isArray(catalog.records)) return empty("INVALID_CATALOG");
-  const phase = token(task.phase);
+  const stageAliases = {architecture: "plan", planning: "plan", implementation: "build", development: "build", integration: "integrate", qa: "verify", testing: "verify", improve: "operate", maintenance: "operate"};
+  const rawPhase = token(task.phase);
+  const phase = stageAliases[rawPhase] || rawPhase;
   if (!phase) return empty("MISSING_PHASE");
   const rawSignals = Array.isArray(task.signals) ? task.signals : [];
   const signals = new Set(rawSignals.slice(0, LIMITS.maxSignals).map(token).filter(Boolean));
