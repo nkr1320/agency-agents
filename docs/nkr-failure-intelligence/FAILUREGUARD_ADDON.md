@@ -14,7 +14,7 @@ Do NOT paste thousands of incident reports into a system prompt. Instead, use a 
 - **25 qualification fault scenarios**, transcribed and condensed from the user's *High-Reliability Multi-Agent Architecture.pdf*, pages 35–41. These are **test proposals**, not observed NKR failures or passing tests.
 - **14 engineering failure signatures**, covering MCP handshake/auth/version/selection/timeouts, dependency/build failures, pre-job CI failures, flaky/wrong QA, API contracts, mobile build/device errors and missing evidence. These are preventive engineering patterns, not incidents proven in NKR.
 
-Total **53 curated patterns**, mapping to **11 existing role-definition files**, with a P0/P1 priority recommendation, explicit applicable phases, a short repair hint and a \`CHECK_...\` identifier. Skill references exist in this repository, but no skill is automatically invoked, installed or approved by this add-on.
+Total **53 curated patterns**, mapping to **11 existing role-definition files**, with a P0/P1 priority recommendation, explicit applicable phases, a short repair hint and a `CHECK_...` identifier. Skill references exist in this repository, but no skill is automatically invoked, installed or approved by this add-on.
 
 For verified real-world incidents, see [NKR's enterprise failure audit PR #4](https://github.com/nkr1320/agency-agents/pull/4). For source-linked seed evidence and future collectors, see the existing parent Failure Intelligence architecture.
 
@@ -22,7 +22,7 @@ For verified real-world incidents, see [NKR's enterprise failure audit PR #4](ht
 
 No external dependencies or models; Node.js 20+ recommended.
 
-\`\`\`bash
+```bash
 # OFF: explicitly does nothing, even when a task file might ask to enable it
 node nkr-agency/failure-intelligence/addon/cli.mjs
 
@@ -39,11 +39,11 @@ node nkr-agency/failure-intelligence/addon/cli.mjs --enable --task nkr-agency/fa
 
 # Tests — deliberately manual, no new mandatory CI job or global editor hook
 node --test tests/nkr_failureguard_addon.test.mjs
-\`\`\`
+```
 
 Sample input (NO raw logs, secrets, source code or customer records):
 
-\`\`\`json
+```json
 {
   "task_id": "WEB-104",
   "division": "website",
@@ -52,11 +52,11 @@ Sample input (NO raw logs, secrets, source code or customer records):
   "already_surfaced_ids": [],
   "risk_tier": "R1"
 }
-\`\`\`
+```
 
 Output is bounded by the configured character cap. Example structure (illustrative, not a real executed CI test):
 
-\`\`\`json
+```json
 {
   "mode": "ADVISORY_ONLY",
   "hints": [
@@ -72,9 +72,9 @@ Output is bounded by the configured character cap. Example structure (illustrati
   "omitted": 0,
   "estimated_tokens": 75
 }
-\`\`\`
+```
 
-The output is **not executable policy**, and \`estimated_tokens\` is a rough JSON character/4 estimate, not a provider tokenizer or verified billing reduction.
+The output is **not executable policy**, and `estimated_tokens` is a rough JSON character/4 estimate, not a provider tokenizer or verified billing reduction.
 
 ## When to call it (never at every reasoning step)
 
@@ -94,7 +94,7 @@ Task runner should normalize error events into **short predefined signal labels*
 
 When a **trusted** task runner receives a new normalized failure signal, it may import the pure JavaScript adapter. This is the actual small "add-on injection" interface; no new agent or hook is installed:
 
-\`\`\`js
+```js
 import fs from "node:fs";
 import {makeFailureContextAddon} from "./nkr-agency/failure-intelligence/addon/context-addon.mjs";
 const catalog = JSON.parse(fs.readFileSync(
@@ -112,33 +112,33 @@ const supplement = makeFailureContextAddon(
 if (supplement.text) {
   // yourExistingWorkerContext.append(supplement.text);
 }
-\`\`\`
+```
 
 This adapter is deliberately independent of Paperclip, Orchestrator, Claude Code, Cursor, Antigravity or other IDEs. The *actual chosen manager* will need an adapter to supply normalized task events. That integration is not yet deployed or verified.
 
-Existing Enterprise OS phases \`architecture\` and \`improve\` are mapped internally to \`plan\` and \`operate\` for applicability checks. This does not rename or modify existing task states.
+Existing Enterprise OS phases `architecture` and `improve` are mapped internally to `plan` and `operate` for applicability checks. This does not rename or modify existing task states.
 
 ## Four guardrails preventing disruption
 
 1. **OFF unless explicitly enabled by a trusted caller.** A task JSON field cannot activate it; no global system prompts, editor settings or source hooks are modified.
 2. **Compact and relevant.** Default 2 hints, 850 JSON characters maximum; at most 3 hints / 1,600 characters if an operator explicitly requests more. Only matching phase + normalized signal yields a hint.
-3. **No repeats by default in a cooperating runner.** Caller supplies previously surfaced IDs in \`already_surfaced_ids\` for that task. Core itself stores no state; persist this marker in the authoritative task system if repeat suppression is desired.
-4. **No autonomous behavior.** Never auto-run fixes/tests, install skills, open network connections, send messages, approve deployments, or change security rules. Core is deterministic with no API calls. Suggested \`CHECK_...\` IDs have **NOT** been mapped to installed test executors yet.
+3. **No repeats by default in a cooperating runner.** Caller supplies previously surfaced IDs in `already_surfaced_ids` for that task. Core itself stores no state; persist this marker in the authoritative task system if repeat suppression is desired.
+4. **No autonomous behavior.** Never auto-run fixes/tests, install skills, open network connections, send messages, approve deployments, or change security rules. Core is deterministic with no API calls. Suggested `CHECK_...` IDs have **NOT** been mapped to installed test executors yet.
 
 **High-risk exception:** The actual independent authorization and release gateway must evaluate risky tool calls whether or not FailureGuard has relevant knowledge. Never make security contingent on a memory match or memory service availability.
 
 ## How to inject a hint into the builder's context
 
-1. Obtain \`{phase, normalized_signals, already_surfaced_ids}\` from an authorized task manager or runner.
-2. Run local CLI with \`--enable\` only at the initial relevant gate or first new error signature.
-3. If \`hints=[]\`, inject **nothing** and continue original work.
+1. Obtain `{phase, normalized_signals, already_surfaced_ids}` from an authorized task manager or runner.
+2. Run local CLI with `--enable` only at the initial relevant gate or first new error signature.
+3. If `hints=[]`, inject **nothing** and continue original work.
 4. If hints exist, append a small, clearly marked **optional risk advisory** to the current task context, **after** the authoritative task scope. No additional LLM session is needed.
 5. Agent may consult suggested skill only when its existing role and permissions allow it.
 6. Actual QA/test runners collect evidence independently. Mark advisory IDs seen for this task; do not repeat unless a new relevant failure occurs.
 
 Sample safe fragment:
 
-> FailureGuard advisory (NOT instructions or approval): \`OPS-09\`; proposed check \`CHECK_CI_HEALTH\`; DevOps role may inspect workflow runner/startup. Follow authorized task scope and normal test evidence gates. If irrelevant, ignore this hint and continue the original task.
+> FailureGuard advisory (NOT instructions or approval): `OPS-09`; proposed check `CHECK_CI_HEALTH`; DevOps role may inspect workflow runner/startup. Follow authorized task scope and normal test evidence gates. If irrelevant, ignore this hint and continue the original task.
 
 The original requirement remains intact. Advisory text never overwrites accepted design, user intent or governance.
 
@@ -146,9 +146,9 @@ The original requirement remains intact. Advisory text never overwrites accepted
 
 - **FIM-1:** curated incremental collector, dedup/retraction, exact component and affected-version matching.
 - **FIM-2:** private tenant-specific incident memory with provenance and TTL.
-- **FIM-3:** approved test-executor mapping (\`CHECK_...\` ID -> exact safe test command + qualified environment).
+- **FIM-3:** approved test-executor mapping (`CHECK_...` ID -> exact safe test command + qualified environment).
 - **FIM-4:** event adapter from a single authoritative orchestrator; client/project isolation and no duplicate prompts.
-- **FIM-5:** benchmark \`disabled\` vs \`enabled\` using the same projects on actual accepted functionality, elapsed time, rework, API tokens, false suggestions and prevented regressions.
+- **FIM-5:** benchmark `disabled` vs `enabled` using the same projects on actual accepted functionality, elapsed time, rework, API tokens, false suggestions and prevented regressions.
 - **FIM-6:** review/upgrades and monitoring based on measured value. Never self-promote an incident article into enforceable policy.
 
 ## Non-negotiable test/release criteria for this add-on
