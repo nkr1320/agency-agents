@@ -1,0 +1,28 @@
+name: NKR FailureGuard Add-on Tests
+
+on:
+  pull_request:
+    paths:
+      - 'nkr-agency/failure-intelligence/**'
+      - 'tests/nkr_failure*.test.mjs'
+      - '.github/workflows/nkr-failureguard-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  addon-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Prepare Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run failure-memory and add-on tests
+        run: |
+          node --test tests/nkr_failure_memory.test.mjs tests/nkr_failureguard_addon.test.mjs tests/nkr_failureguard_context.test.mjs tests/nkr_failureguard_events.test.mjs
