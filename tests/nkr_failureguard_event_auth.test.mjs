@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHmac} from 'node:crypto';
-import {canonicalizeFailureEvent,verifyFailureEvent} from '../nkr-agency/failure-intelligence/addon/event-auth.mjs';
+import {canonicalizeFailureEvent,verifyFailureEvent,verifyFailureEventAsync} from '../nkr-agency/failure-intelligence/addon/event-auth.mjs';
 
 const key='a-secret-production-server-key-at-least-32-bytes-long';
 const now=Date.parse('2026-11-08T12:00:00.000Z');
@@ -33,3 +33,8 @@ test('unexpected outer keys rejected',()=>{const e=makeEvent();e.productionPermi
 test('unknown signing key denied',()=>assert.equal(verifyFailureEvent(makeEvent(),options({keys:{}})).reason,'UNKNOWN_KEY'));
 test('weak server secret denied',()=>assert.equal(verifyFailureEvent(makeEvent(),options({keys:{'key-1':'short'}})).reason,'WEAK_SIGNING_SECRET'));
 test('valid event returns only normalized fields',()=>{const r=verifyFailureEvent(makeEvent(),options());assert.equal(r.ok,true);assert.equal(r.record.httpStatus,401);assert.equal(r.record.structuredErrorCode,'MCP_AUTH_FAILED')});
+
+test('async event reservation succeeds on first durable DB insert',async()=>assert.equal((await verifyFailureEventAsync(makeEvent(),options({reserveEventId:async()=>true}))).ok,true));
+test('async replay reservation denied on duplicate insert',async()=>assert.equal((await verifyFailureEventAsync(makeEvent(),options({reserveEventId:async()=>false}))).reason,'REPLAY_OR_UNAVAILABLE'));
+test('async replay store failure fails closed',async()=>assert.equal((await verifyFailureEventAsync(makeEvent(),options({reserveEventId:async()=>{throw Error('db unavailable')}}))).reason,'REPLAY_STORE_ERROR'));
+test('concurrent signed events allow only one atomic claim',async()=>{const seen=new Set(),opts=options({reserveEventId:async({event_id})=>!seen.has(event_id)&&(seen.add(event_id),true)});const r=await Promise.all([verifyFailureEventAsync(makeEvent(),opts),verifyFailureEventAsync(makeEvent(),opts)]);assert.equal(r.filter(x=>x.ok).length,1)});
