@@ -81,3 +81,11 @@ test("default bound is compact",()=>{
   const result=run(["mcp-401","mcp-403"],"build");
   assert.ok(JSON.stringify(result).length<=LIMITS.defaultChars);
 });
+
+test("matching records after 200 entries are not silently discarded",()=>{
+ const filler=Array.from({length:220},(_,i)=>({...catalog.records[0],id:"FILLER-"+i,signals:["never-matching-"+i]}));
+ const tail={...catalog.records[0],id:"TAIL-221",signals:["late-signal"],phases:["build"],checks:["CHECK_LATE_SIGNAL"]};
+ const full={...catalog,records:[...filler,tail]};
+ const found=assessFailureGuard({phase:"build",signals:["late-signal"]},full,{enabled:true});
+ assert.ok(found.hints.some(h=>h.id==="TAIL-221"));
+});
