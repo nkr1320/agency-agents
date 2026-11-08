@@ -66,9 +66,8 @@ function reject(reason) {return {ok:false,reason};}
  * - reserveEventId: atomic, durable single-use reservation function (mandatory)
  * - now: injectable clock for testing, default Date.now()
  */
-export function verifyFailureEvent(envelope,options={}) {
+function verifyEnvelopeWithoutReplay(envelope,options={}) {
   if (!id(options.expectedCompanyId) || !id(options.expectedProjectId)) return reject('NO_TRUSTED_SCOPE');
-  if (typeof options.reserveEventId !== 'function') return reject('NO_REPLAY_STORE');
   const canonical=canonicalizeFailureEvent(envelope);
   if (!canonical || Buffer.byteLength(canonical,'utf8') > 16384) return reject('INVALID_ENVELOPE');
   if (envelope.company_id !== options.expectedCompanyId || envelope.project_id !== options.expectedProjectId) return reject('SCOPE_MISMATCH');
@@ -83,14 +82,33 @@ export function verifyFailureEvent(envelope,options={}) {
   const expected=createHmac('sha256',secret).update(canonical,'utf8').digest();
   const supplied=Buffer.from(envelope.signature,'hex');
   if (supplied.length !== expected.length || !timingSafeEqual(supplied,expected)) return reject('SIGNATURE_MISMATCH');
-  // The callback MUST reserve by (company_id,event_id) with an atomic UNIQUE
-  // constraint; in-memory Sets cannot deliver production replay protection.
-  let reserved=false;
-  try {
-    reserved=options.reserveEventId({company_id:envelope.company_id, event_id:envelope.event_id,
-      run_id:envelope.run_id,occurred_at:envelope.occurred_at}) === true;
-  } catch {return reject('REPLAY_STORE_ERROR');}
-  if (!reserved) return reject('REPLAY_OR_UNAVAILABLE');
   const verified=canonicalPayload(envelope.payload);
   return {ok:true,record:verified,evidence:{event_id:envelope.event_id,kid:envelope.kid,run_id:envelope.run_id,company_id:envelope.company_id,project_id:envelope.project_id}};
+}
+
+function reservationArguments(envelope) {
+  return {company_id:envelope.company_id,event_id:envelope.event_id,
+    run_id:envelope.run_id,occurred_at:envelope.occurred_at};
+}
+
+/** Synchronous reservation for trusted synchronous stores. */
+export function verifyFailureEvent(envelope,options={}) {
+  if (typeof options.reserveEventId !== 'function') return reject('NO_REPLAY_STORE');
+  const result=verifyEnvelopeWithoutReplay(envelope,options);
+  if (!result.ok) return result;
+  let reserved=false;
+  try {reserved=options.reserveEventId(reservationArguments(envelope)) === true;}
+  catch {return reject('REPLAY_STORE_ERROR');}
+  return reserved ? result : reject('REPLAY_OR_UNAVAILABLE');
+}
+
+/** Async reservation for durable remote DB stores. Reservation MUST be atomic. */
+export async function verifyFailureEventAsync(envelope,options={}) {
+  if (typeof options.reserveEventId !== 'function') return reject('NO_REPLAY_STORE');
+  const result=verifyEnvelopeWithoutReplay(envelope,options);
+  if (!result.ok) return result;
+  let reserved=false;
+  try {reserved=(await options.reserveEventId(reservationArguments(envelope))) === true;}
+  catch {return reject('REPLAY_STORE_ERROR');}
+  return reserved ? result : reject('REPLAY_OR_UNAVAILABLE');
 }
