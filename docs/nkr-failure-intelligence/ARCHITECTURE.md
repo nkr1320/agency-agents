@@ -1,6 +1,6 @@
 # NKR Failure Intelligence Memory (FIM) — Architecture and MVP
 
-**Status (2026-11-08):** Proposed continuous evidence-intelligence system. An **offline, advisory-only demonstration** and 10-source candidate registry with 5 curated seed records are committed in this draft. **No live feed ingestion, database, scheduler, CI integration, incident alerting, runtime policy enforcement or persistent memory service has been installed.** All feeds are intentionally \`enabled:false\` in source-registry.json. This document must not be used to claim an always-on watcher already exists.
+**Status (2026-11-08):** Proposed continuous evidence-intelligence system. An **offline, advisory-only demonstration** and 10-source candidate registry with 5 curated seed records are committed in this draft. **No live feed ingestion, database, scheduler, CI integration, incident alerting, runtime policy enforcement or persistent memory service has been installed.** All feeds are intentionally `enabled:false` in source-registry.json. This document must not be used to claim an always-on watcher already exists.
 
 ## 1. Why this is different from a normal agent memory
 
@@ -26,7 +26,7 @@ See [source-registry.json](../../nkr-agency/failure-intelligence/source-registry
 
 ## 3. Proposed ingestion pipeline
 
-\`\`\`
+```
 Authorized source list
     -> scheduled pull/webhook (rate limited; fetch caps, TLS/host allowlist)
     -> raw immutable evidence object + SHA256/ETag/publisher/time
@@ -38,7 +38,7 @@ Authorized source list
     -> reviewed failure-case + preventive checks + test idea
     -> tenant-safe index and approved control mapping
     -> retrieval at task gates and incident loop
-\`\`\`
+```
 
 **Security of feed collectors:** avoid arbitrary URLs and redirects, require source host allowlists, validate MIME/schema/size, cap per-feed fetch size and retries, scan downloaded archives, no shell execution, isolate network fetch from agent workers, and never pass raw HTML or upstream prompts directly into privileged agent instructions.
 
@@ -46,7 +46,7 @@ Authorized source list
 
 ## 4. Memory schema (full target, not yet persisted)
 
-\`\`\`json
+```json
 {
   "finding_id":"FI-...",
   "incident_id":"canonical deduplication identifier",
@@ -67,7 +67,7 @@ Authorized source list
   "expires_at":"...",
   "private_tenant_scope":null
 }
-\`\`\`
+```
 
 Keep **two stores**: (1) a shared **public threat/quality knowledge base**, and (2) a tenant-private incident and execution evidence base. **Never mix customer logs into a public semantic search index**. Private logs must be redacted, access-controlled and retained only within agreed scope. Use Postgres for normalized records and applicability links; a vector index can assist discovery, but exact CVE/package/version and approved control matching stays deterministic. Do not "train" a foundation model directly on arbitrary scraped incident text.
 
@@ -81,7 +81,7 @@ At each checkpoint the control plane supplies only: signed job ID, division, pha
 3. Relevant historical near misses with provenance and scope.
 4. Research/blog cases as **advisory signals**, never as hard release blockers on similarity alone.
 
-The MVP [retrieve.mjs](../../nkr-agency/failure-intelligence/retrieve.mjs) implements only **exact tag overlap** against curated seed records. It outputs record ID, source URL, matched tags and internal \`CHECK_...\` IDs. It **intentionally does not return arbitrary source prose** and always returns \`ADVISORY_ONLY\`, \`version_scope: NOT_ASSESSED\`. It has no live access to tools and cannot validate whether a package version is vulnerable.
+The MVP [retrieve.mjs](../../nkr-agency/failure-intelligence/retrieve.mjs) implements only **exact tag overlap** against curated seed records. It outputs record ID, source URL, matched tags and internal `CHECK_...` IDs. It **intentionally does not return arbitrary source prose** and always returns `ADVISORY_ONLY`, `version_scope: NOT_ASSESSED`. It has no live access to tools and cannot validate whether a package version is vulnerable.
 
 **Activation points**
 - Intake/research: similar prior failed scope or unsafe integration.
@@ -104,7 +104,7 @@ The MVP [retrieve.mjs](../../nkr-agency/failure-intelligence/retrieve.mjs) imple
 
 ## 7. Knowledge-to-control promotion
 
-\`\`\`
+```
 DISCOVERED
  -> PROVENANCE_VERIFIED
  -> APPLICABILITY_VALIDATED
@@ -114,7 +114,7 @@ DISCOVERED
  -> INDEPENDENT_NEGATIVE_TEST_PASSED
  -> POLICY_ENABLED with accountable human approval
  -> MONITORED, VERSIONED, REVOCABLE
-\`\`\`
+```
 
 External content **never promotes itself**. A recommendation becomes an enforced runtime policy or hard CI gate only after NKR engineering/security review, a real passing test and human-approved versioned change. Policies must be explainable and revocable when upstream evidence is corrected.
 
