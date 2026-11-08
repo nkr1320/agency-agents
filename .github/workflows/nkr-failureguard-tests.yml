@@ -25,4 +25,4 @@ jobs:
           node-version: '22'
       - name: Run failure-memory and add-on tests
         run: |
-          node --test tests/nkr_failure_memory.test.mjs tests/nkr_failureguard_addon.test.mjs tests/nkr_failureguard_context.test.mjs tests/nkr_failureguard_events.test.mjs tests/nkr_failureguard_paperclip.test.mjs
+          node --test tests/nkr_failure_memory.test.mjs tests/nkr_failureguard_addon.test.mjs tests/nkr_failureguard_context.test.mjs tests/nkr_failureguard_events.test.mjs tests/nkr_failureguard_paperclip.test.mjs tests/nkr_failureguard_event_auth.test.mjs
