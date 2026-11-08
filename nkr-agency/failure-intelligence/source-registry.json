@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "purpose": "Candidate public-source registry, not an activated or exhaustive ingestion service",
+  "sources": [
+    {
+      "id": "cisa-kev",
+      "name": "CISA KEV JSON mirror",
+      "url": "https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json",
+      "homepage": "https://github.com/cisagov/kev-data",
+      "type": "structured-verified-exploitation",
+      "poll": "daily and when upstream revision changes",
+      "source_trust": "government-maintained",
+      "license": "CC0 per publisher",
+      "adapter": "cisa-kev",
+      "mode": "periodic-full-diff",
+      "enabled": false
+    },
+    {
+      "id": "osv",
+      "name": "OSV API",
+      "url": "https://api.osv.dev/v1/querybatch",
+      "homepage": "https://google.github.io/osv.dev/api/",
+      "type": "structured-versioned-vulnerability",
+      "poll": "on SBOM/dependency change plus daily recheck",
+      "source_trust": "curated-aggregator",
+      "license": "review per dataset and API",
+      "adapter": "osv-querybatch",
+      "mode": "on-demand-package-lookup",
+      "enabled": false
+    },
+    {
+      "id": "github-ghsa",
+      "name": "GitHub global security advisories",
+      "url": "https://api.github.com/advisories",
+      "homepage": "https://docs.github.com/en/rest/security-advisories/global-advisories",
+      "type": "structured-software-advisory",
+      "poll": "every 6 hours, cursor/modified + ETag",
+      "source_trust": "reviewed-advisories-only-by-default",
+      "license": "review API terms",
+      "adapter": "github-advisories",
+      "mode": "incremental-polling",
+      "enabled": false
+    },
+    {
+      "id": "github-dependabot",
+      "name": "GitHub Dependabot repository alerts",
+      "url": "https://api.github.com/repos/{owner}/{repo}/dependabot/alerts",
+      "homepage": "https://docs.github.com/en/rest/dependabot/alerts",
+      "type": "private-repository-advisory",
+      "poll": "event or every 6 hours",
+      "source_trust": "vendor-security-scan",
+      "license": "requires owner permissions",
+      "adapter": "github-dependabot",
+      "mode": "per-authorized-repo",
+      "enabled": false
+    },
+    {
+      "id": "owasp-agentic",
+      "name": "OWASP agentic security framework",
+      "url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+      "homepage": "https://genai.owasp.org/",
+      "type": "research-standard",
+      "poll": "weekly release/change discovery",
+      "source_trust": "expert-guidance-not-live-incident-feed",
+      "license": "review publication rights",
+      "adapter": "curated-review",
+      "mode": "human-review",
+      "enabled": false
+    },
+    {
+      "id": "owasp-incidents",
+      "name": "OWASP agentic/GenAI incident roundup",
+      "url": "https://genai.owasp.org/2026/10/08/genai-and-agentic-ai-exploit-roundup-q3-2026/",
+      "homepage": "https://genai.owasp.org/",
+      "type": "incident-synthesis",
+      "poll": "monthly new roundup discovery",
+      "source_trust": "secondary-analysis",
+      "license": "review publication rights",
+      "adapter": "curated-review",
+      "mode": "human-review",
+      "enabled": false
+    },
+    {
+      "id": "mcp-spec",
+      "name": "MCP specification and SDK updates",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+      "homepage": "https://modelcontextprotocol.io/",
+      "type": "protocol-release-notes",
+      "poll": "weekly new-release/issue discovery",
+      "source_trust": "official-maintainers",
+      "license": "review publisher terms",
+      "adapter": "curated-release",
+      "mode": "review-on-version-change",
+      "enabled": false
+    },
+    {
+      "id": "nkr-internal",
+      "name": "NKR private execution findings",
+      "url": null,
+      "homepage": null,
+      "type": "internal-observability",
+      "poll": "event-driven",
+      "source_trust": "evidence-attested-by-internal-runners",
+      "license": "client data policy per tenant",
+      "adapter": "trusted-telemetry",
+      "mode": "per-tenant; never stored in public repository",
+      "enabled": false
+    }
+  ],
+  "mandatory_controls": [
+    "allowlisted-source-host",
+    "no-open-redirect",
+    "bounded-fetch-size",
+    "signature-or-hash-provenance",
+    "ETag-cursor-state",
+    "dedupe-and-corrections",
+    "license-and-privacy-check",
+    "isolate-untrusted-text",
+    "never-treat-as-instructions",
+    "approval-before-rule-promotion"
+  ]
+}
