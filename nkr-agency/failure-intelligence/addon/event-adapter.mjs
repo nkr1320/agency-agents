@@ -24,6 +24,28 @@ export const FAILURE_EVENTS = Object.freeze({
   "operations.alert": "operate"
 });
 
+/**
+ * Fixed, reviewed translation of MACHINE CODES to catalog signals.
+ * Never parse free-form logs or model text here.
+ */
+export const STRUCTURED_ERROR_SIGNALS = Object.freeze({
+  "MCP_HANDSHAKE_FAILED": "mcp-handshake-failed",
+  "MCP_TOOL_NOT_FOUND": "mcp-tool-not-found",
+  "MCP_SCHEMA_MISMATCH": "mcp-schema-mismatch",
+  "MCP_TIMEOUT": "mcp-timeout",
+  "MCP_AUTH_FAILED": "mcp-401",
+  "CI_STARTUP_FAILURE": "ci-startup-failure",
+  "CI_JOB_NOT_STARTED": "ci-job-not-started",
+  "NPM_ERESOLVE": "npm-eresolve",
+  "TS2322": "ts2322",
+  "MODULE_NOT_FOUND": "module-not-found",
+  "GRADLE_BUILD_FAILED": "gradle-build-failed",
+  "ANDROID_EMULATOR_UNAVAILABLE": "android-emulator-unavailable",
+  "TEST_ARTIFACT_MISSING": "missing-test-artifact",
+  "API_CONTRACT_VIOLATION": "api-schema-violation",
+  "TOOL_TIMEOUT": "tool-timeout"
+});
+
 const MAX_EVENT_SIGNALS = 8;
 const MAX_SEEN_IDS = 100;
 
@@ -61,14 +83,25 @@ export function adviseForVerifiedEvent(event, catalog, options = {}) {
   const known = new Set(
     catalog.records.flatMap(r => Array.isArray(r.signals) ? r.signals : []).map(asSignal).filter(Boolean)
   );
-  const normalized = Array.isArray(event.signals) ? event.signals.slice(0, MAX_EVENT_SIGNALS).map(asSignal).filter(Boolean) : [];
+  // Structured machine signals win over task-provided labels; an attacker
+  // cannot push a relevant verified error out of the first eight positions.
+  const structured = [];
+  const code = typeof event.error_code === "string" ? event.error_code : "";
+  if (Object.hasOwn(STRUCTURED_ERROR_SIGNALS, code)) structured.push(STRUCTURED_ERROR_SIGNALS[code]);
+  if (event.kind === "mcp.error" && event.http_status === 401) structured.push("mcp-401");
+  if (event.kind === "mcp.error" && event.http_status === 403) structured.push("mcp-403");
+  if (event.kind === "ci.startup_failed") structured.push("ci-startup-failure");
+  const provided = Array.isArray(event.signals) ? event.signals : [];
+  const normalized = [...structured, ...provided].slice(0, MAX_EVENT_SIGNALS).map(asSignal).filter(Boolean);
   const signals = [...new Set(normalized.filter(s => known.has(s)))];
   if (!signals.length) return blank("NO_RECOGNIZED_SIGNALS");
 
   // The event KIND determines canonical phase; caller-supplied phase may only
   // narrow it to a matching phase, never arbitrarily route to a release check.
   const expectedPhase = FAILURE_EVENTS[event.kind];
-  const requestedPhase = asPhase(event.phase);
+  const alias = {architecture:"plan",planning:"plan",implementation:"build",development:"build",integration:"integrate",qa:"verify",testing:"verify",improve:"operate",maintenance:"operate"};
+  const originalPhase = asPhase(event.phase);
+  const requestedPhase = alias[originalPhase] || originalPhase;
   if (requestedPhase && requestedPhase !== expectedPhase) return blank("PHASE_MISMATCH");
 
   const seen = Array.isArray(event.already_surfaced_ids)
