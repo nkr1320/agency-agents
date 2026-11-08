@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from nkr_agency_validate import validate, validate_policy, validate_team  # noqa: E402
+from nkr_agency_validate import validate, validate_policy, validate_team, validate_registry  # noqa: E402
 
 
 class EnterpriseAgencyManifestTests(unittest.TestCase):
@@ -48,6 +48,21 @@ class EnterpriseAgencyManifestTests(unittest.TestCase):
         config["execution"]["requires_independent_release_approval"] = False
         errors = validate_team(config, self.policy, ROOT, "website")
         self.assertTrue(any("risk controls not enabled" in error for error in errors), errors)
+
+    def test_registry_matches_all_three_divisions(self):
+        self.assertEqual(validate_registry(ROOT), [])
+
+    def test_unreviewed_skill_cannot_be_production_approved(self):
+        registry = json.loads((ROOT / "nkr-agency/skills/registry.json").read_text(encoding="utf-8"))
+        registry["skills"][0]["production_allowed"] = True
+        errors = validate_registry(ROOT, registry)
+        self.assertTrue(any("production enabled without approval" in x for x in errors), errors)
+
+    def test_role_removed_from_registry_is_blocked(self):
+        registry = json.loads((ROOT / "nkr-agency/skills/registry.json").read_text(encoding="utf-8"))
+        registry["skills"].pop(0)
+        errors = validate_registry(ROOT, registry)
+        self.assertTrue(any("role registry mismatch" in x for x in errors), errors)
 
     def test_policy_tiers_checked(self):
         config = copy.deepcopy(self.policy)

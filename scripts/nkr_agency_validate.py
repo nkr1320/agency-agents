@@ -122,6 +122,66 @@ def validate_team(team: dict, policy: dict, root: Path, file_id: str) -> list[st
     return errors
 
 
+def validate_registry(root: Path, registry: dict | None = None) -> list[str]:
+    """Validate role coverage and forbid invented approvals in the skills catalog."""
+    errors = []
+    if registry is None:
+        try:
+            registry = load_json(root / "nkr-agency/skills/registry.json")
+        except (OSError, ValueError) as exc:
+            return [f"skills: cannot load registry: {exc}"]
+    if not isinstance(registry, dict) or registry.get("schema_version") != 1:
+        return ["skills: expected a schema_version 1 registry"]
+    entries = registry.get("skills")
+    if not isinstance(entries, list) or not entries:
+        return ["skills: missing registry entries"]
+    allowed = set(registry.get("promotion_states", []))
+    required = set()
+    for team_id in TEAMS:
+        try:
+            team = load_json(root / f"nkr-agency/teams/{team_id}.json")
+            required.update(r["skill_ref"] for r in team["roles"])
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            errors.append(f"skills: cannot load role references for {team_id}: {exc}")
+    seen_ids = set()
+    registered = set()
+    for item in entries:
+        if not isinstance(item, dict):
+            errors.append("skills: entry must be object")
+            continue
+        skill_id = item.get("id")
+        if not isinstance(skill_id, str) or not skill_id or skill_id in seen_ids:
+            errors.append(f"skills: missing or duplicate ID {skill_id!r}")
+        seen_ids.add(skill_id)
+        if item.get("state") not in allowed:
+            errors.append(f"skills: {skill_id} has invalid promotion state")
+        if not item.get("source") or not isinstance(item.get("teams"), list) or not item["teams"]:
+            errors.append(f"skills: {skill_id} needs source and owner teams")
+        if item.get("kind") == "role_instruction":
+            ref = item.get("path")
+            if not isinstance(ref, str) or not ref.endswith(".md"):
+                errors.append(f"skills: {skill_id} missing role path")
+            else:
+                registered.add(ref)
+                safe = (root / ref).resolve()
+                if not safe.is_relative_to(root.resolve()) or not safe.is_file():
+                    errors.append(f"skills: {skill_id} path missing/outside repo: {ref}")
+            if not item.get("source_commit"):
+                errors.append(f"skills: {skill_id} missing pinned source commit")
+        elif item.get("kind") != "tool_candidate":
+            errors.append(f"skills: {skill_id} unknown capability kind")
+        if item.get("production_allowed") is True and (
+            item.get("state") not in ("APPROVED", "PILOT", "GENERAL")
+            or any(item.get(x) != "PASS" for x in
+                   ("license_review_status", "security_review_status", "benchmark_status"))
+            or item.get("owner") in (None, "UNASSIGNED")
+        ):
+            errors.append(f"skills: {skill_id} production enabled without approval evidence")
+    if registered != required:
+        errors.append(f"skills: role registry mismatch (missing={sorted(required - registered)}, extra={sorted(registered - required)})")
+    return errors
+
+
 def validate(root: Path = ROOT) -> list[str]:
     root = root.resolve()
     errors = []
@@ -142,6 +202,7 @@ def validate(root: Path = ROOT) -> list[str]:
             errors.append(f"{team_id}: manifest must be an object")
             continue
         errors += validate_team(config, policy, root, team_id)
+    errors += validate_registry(root)
     return errors
 
 
@@ -155,7 +216,7 @@ def main() -> int:
             print("ERROR:", issue)
         print(f"FAIL: {len(errors)} manifest issue(s). Runtime enforcement NOT assessed.")
         return 1
-    print("PASS: 3 team manifests, role references, ten phases and governance structure validated.")
+    print("PASS: 3 team manifests, 10 phases, role references, governance and skill registry validated.")
     print("LIMITATION: this check does NOT execute agents, verify security controls or approve deployments.")
     return 0
 

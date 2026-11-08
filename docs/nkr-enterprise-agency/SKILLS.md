@@ -2,6 +2,10 @@
 
 **Goal:** continuously improve proven delivery capability without importing untrusted prompts/hooks or accumulating overlapping managers. Upgrading means measurable performance and safe operations, not counting files or stars.
 
+## Versioned skills catalog
+
+The machine-readable [pilot registry](../../nkr-agency/skills/registry.json) currently records **23 distinct existing role instructions and seven integration/tool candidates**, all **DISCOVERED**, **unreviewed for production**, and **not active**. The governance validator refuses a production-approved skill unless source provenance, named ownership, license/security reviews and benchmarks are recorded. A passed static check alone **does not grant runtime access**.
+
 ## Skill registry fields
 
 Every capability requires **ID, discipline, owner, version/commit, original source URL, license and notice obligations, tested runtime, compatible model/tool versions, required permissions, expected artifacts, risk tier, benchmark, known limitations, last review date, rollback version and adoption state**.

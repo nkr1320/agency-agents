@@ -34,6 +34,7 @@ Mandatory cross-division controls live in [governance](GOVERNANCE.md). Domain pi
 - [agent manifest](../../nkr-agency/teams/agents.json)
 - [app manifest](../../nkr-agency/teams/app.json)
 - [governance controls](../../nkr-agency/policies/governance.json)
+- [skills registry](../../nkr-agency/skills/registry.json)
 
 ## Roadmap, not a claim of implementation
 
