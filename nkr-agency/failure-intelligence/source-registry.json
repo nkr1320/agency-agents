@@ -94,6 +94,32 @@
       "enabled": false
     },
     {
+      "id": "nx-vendor-incident",
+      "name": "Nx vendor supply-chain postmortem",
+      "url": "https://nx.dev/blog/s1ngularity-postmortem",
+      "homepage": "https://nx.dev/blog",
+      "type": "vendor-incident-postmortem",
+      "poll": "periodic discovery; reviewed manually",
+      "source_trust": "first-party-maintainer-report",
+      "license": "review publisher terms",
+      "adapter": "curated-review",
+      "mode": "human-review",
+      "enabled": false
+    },
+    {
+      "id": "openai-official",
+      "name": "OpenAI published agent coordination incident",
+      "url": "https://openai.com/index/hugging-face-incident-and-the-road-ahead/",
+      "homepage": "https://openai.com/",
+      "type": "vendor-incident-postmortem",
+      "poll": "periodic discovery; reviewed manually",
+      "source_trust": "first-party-vendor-report",
+      "license": "review publisher terms",
+      "adapter": "curated-review",
+      "mode": "human-review",
+      "enabled": false
+    },
+    {
       "id": "nkr-internal",
       "name": "NKR private execution findings",
       "url": null,
