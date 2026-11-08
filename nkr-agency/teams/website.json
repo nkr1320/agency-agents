@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "id": "website",
+  "name": "NKR Website Division",
+  "focus": "Websites, landing pages, dashboards and web applications; QA and maintenance",
+  "roles": [
+    {
+      "id": "delivery_lead",
+      "skill_ref": "project-management/project-manager-senior.md",
+      "responsibility": "scope, customer acceptance and economics"
+    },
+    {
+      "id": "research",
+      "skill_ref": "product/product-trend-researcher.md",
+      "responsibility": "user/market/accessibility research"
+    },
+    {
+      "id": "ux",
+      "skill_ref": "design/design-ux-architect.md",
+      "responsibility": "responsive UX states"
+    },
+    {
+      "id": "architect",
+      "skill_ref": "engineering/engineering-software-architect.md",
+      "responsibility": "architecture and ADRs"
+    },
+    {
+      "id": "frontend",
+      "skill_ref": "engineering/engineering-frontend-developer.md",
+      "responsibility": "accessible web UI implementation"
+    },
+    {
+      "id": "backend",
+      "skill_ref": "engineering/engineering-backend-architect.md",
+      "responsibility": "API, auth and database"
+    },
+    {
+      "id": "qa",
+      "skill_ref": "testing/testing-test-automation-engineer.md",
+      "responsibility": "unit, API and browser journeys"
+    },
+    {
+      "id": "evidence",
+      "skill_ref": "testing/testing-evidence-collector.md",
+      "responsibility": "trace, screenshots, reproducible defects"
+    },
+    {
+      "id": "reviewer",
+      "skill_ref": "engineering/engineering-code-reviewer.md",
+      "responsibility": "independent peer review"
+    },
+    {
+      "id": "security",
+      "skill_ref": "security/security-appsec-engineer.md",
+      "responsibility": "threat model and OWASP web controls"
+    },
+    {
+      "id": "release",
+      "skill_ref": "engineering/engineering-devops-automator.md",
+      "responsibility": "reproducible build and staged deployment"
+    },
+    {
+      "id": "ops",
+      "skill_ref": "engineering/engineering-sre.md",
+      "responsibility": "SLOs, incidents and maintenance"
+    }
+  ],
+  "phases": [
+    {
+      "id": "intake",
+      "lead": "delivery_lead",
+      "required_artifacts": [
+        "approved_scope.md",
+        "authorized_hosts.json"
+      ],
+      "evidence": [
+        "signed authority",
+        "scope exclusions"
+      ],
+      "gate": "SCOPE_APPROVED"
+    },
+    {
+      "id": "research",
+      "lead": "research",
+      "required_artifacts": [
+        "research.md"
+      ],
+      "evidence": [
+        "requirements provenance",
+        "accessibility and user needs"
+      ],
+      "gate": "RESEARCH_REVIEWED"
+    },
+    {
+      "id": "architecture",
+      "lead": "architect",
+      "required_artifacts": [
+        "architecture.md",
+        "adr.md",
+        "risk_register.md"
+      ],
+      "evidence": [
+        "data flow",
+        "auth and privacy boundaries"
+      ],
+      "gate": "ARCHITECTURE_REVIEWED"
+    },
+    {
+      "id": "design",
+      "lead": "ux",
+      "required_artifacts": [
+        "design_spec.md"
+      ],
+      "evidence": [
+        "responsive breakpoints",
+        "loading/error/empty states"
+      ],
+      "gate": "DESIGN_APPROVED"
+    },
+    {
+      "id": "build",
+      "lead": "frontend",
+      "required_artifacts": [
+        "feature_pr",
+        "build_manifest.json"
+      ],
+      "evidence": [
+        "source diff",
+        "unit and integration outputs"
+      ],
+      "gate": "BUILD_CHECKED"
+    },
+    {
+      "id": "verify",
+      "lead": "qa",
+      "required_artifacts": [
+        "test_report.md",
+        "evidence_index.json"
+      ],
+      "evidence": [
+        "real browser assertions",
+        "API tests",
+        "defect reproduction"
+      ],
+      "gate": "EVIDENCE_VERIFIED"
+    },
+    {
+      "id": "review",
+      "lead": "reviewer",
+      "required_artifacts": [
+        "review.md"
+      ],
+      "evidence": [
+        "independent code/security review",
+        "regression risks"
+      ],
+      "gate": "REVIEW_SIGNED"
+    },
+    {
+      "id": "release",
+      "lead": "release",
+      "required_artifacts": [
+        "release_manifest.md",
+        "rollback.md"
+      ],
+      "evidence": [
+        "reproducible artifact",
+        "authorized deployment signoff"
+      ],
+      "gate": "RELEASE_AUTHORIZED"
+    },
+    {
+      "id": "operate",
+      "lead": "ops",
+      "required_artifacts": [
+        "runbook.md",
+        "slo_report.md"
+      ],
+      "evidence": [
+        "health checks",
+        "incident owner and on-call route"
+      ],
+      "gate": "OPERATIONS_ACCEPTED"
+    },
+    {
+      "id": "improve",
+      "lead": "ops",
+      "required_artifacts": [
+        "maintenance_backlog.md",
+        "postmortems.md"
+      ],
+      "evidence": [
+        "customer feedback",
+        "regressions",
+        "versioned change requests"
+      ],
+      "gate": "CHANGE_CONTROLLED"
+    }
+  ],
+  "metrics": [
+    "lead_to_release",
+    "first_pass_test_rate",
+    "escaped_defect_rate",
+    "change_failure_rate",
+    "recovery_time",
+    "customer_acceptance_time",
+    "gross_margin"
+  ],
+  "maintenance": [
+    "dependency and browser regression checks",
+    "broken forms and uptime",
+    "security patches",
+    "performance and SEO monitoring"
+  ],
+  "standards": [
+    "OWASP ASVS 5.0.0",
+    "WCAG according to contract",
+    "DORA delivery metrics"
+  ],
+  "execution": {
+    "default_concurrency": 2,
+    "requires_isolated_worktrees": true,
+    "requires_independent_release_approval": true,
+    "client_data_isolation": true,
+    "model_tool_calls_untrusted": true
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "id": "agents",
+  "name": "NKR AI Agent Division",
+  "focus": "AI assistants, multi-agent orchestration, RAG, tooling, evaluation, operation",
+  "roles": [
+    {
+      "id": "delivery_lead",
+      "skill_ref": "project-management/project-manager-senior.md",
+      "responsibility": "client scope and model usage budget"
+    },
+    {
+      "id": "research",
+      "skill_ref": "product/product-trend-researcher.md",
+      "responsibility": "use case and dataset research"
+    },
+    {
+      "id": "architect",
+      "skill_ref": "engineering/engineering-multi-agent-systems-architect.md",
+      "responsibility": "agent topology, permissions, trust boundaries"
+    },
+    {
+      "id": "prompt",
+      "skill_ref": "engineering/engineering-prompt-engineer.md",
+      "responsibility": "dialogue and prompt specifications"
+    },
+    {
+      "id": "builder",
+      "skill_ref": "engineering/engineering-ai-engineer.md",
+      "responsibility": "agent execution and integrations"
+    },
+    {
+      "id": "rag",
+      "skill_ref": "engineering/engineering-rag-pipeline-engineer.md",
+      "responsibility": "retrieval, indexing and citations"
+    },
+    {
+      "id": "api",
+      "skill_ref": "engineering/engineering-api-platform-engineer.md",
+      "responsibility": "typed tool contracts and auth"
+    },
+    {
+      "id": "evaluator",
+      "skill_ref": "testing/testing-test-results-analyzer.md",
+      "responsibility": "golden sets, evals and failure analysis"
+    },
+    {
+      "id": "evidence",
+      "skill_ref": "testing/testing-evidence-collector.md",
+      "responsibility": "actual traces and evidence"
+    },
+    {
+      "id": "privacy",
+      "skill_ref": "engineering/engineering-privacy-engineer.md",
+      "responsibility": "privacy and data isolation"
+    },
+    {
+      "id": "security",
+      "skill_ref": "security/security-ai-generated-code-auditor.md",
+      "responsibility": "agent risk, prompt injection and tool permissions"
+    },
+    {
+      "id": "reviewer",
+      "skill_ref": "engineering/engineering-code-reviewer.md",
+      "responsibility": "independent review"
+    },
+    {
+      "id": "ops",
+      "skill_ref": "engineering/engineering-sre.md",
+      "responsibility": "monitoring, incidents, usage budgets"
+    }
+  ],
+  "phases": [
+    {
+      "id": "intake",
+      "lead": "delivery_lead",
+      "required_artifacts": [
+        "scope.md",
+        "tool_permission_matrix.md"
+      ],
+      "evidence": [
+        "authorized data sources",
+        "approved tool write scope"
+      ],
+      "gate": "SCOPE_APPROVED"
+    },
+    {
+      "id": "research",
+      "lead": "research",
+      "required_artifacts": [
+        "task_distribution.md",
+        "dataset_provenance.md"
+      ],
+      "evidence": [
+        "representative cases",
+        "data licensing and consent"
+      ],
+      "gate": "RESEARCH_REVIEWED"
+    },
+    {
+      "id": "architecture",
+      "lead": "architect",
+      "required_artifacts": [
+        "agent_graph.md",
+        "threat_model.md",
+        "risk_register.md"
+      ],
+      "evidence": [
+        "bounded tool access",
+        "failure recovery",
+        "human escalation"
+      ],
+      "gate": "ARCHITECTURE_REVIEWED"
+    },
+    {
+      "id": "design",
+      "lead": "prompt",
+      "required_artifacts": [
+        "conversation_design.md",
+        "tool_schemas.md"
+      ],
+      "evidence": [
+        "refusal/handoff flows",
+        "output schema tests"
+      ],
+      "gate": "DESIGN_APPROVED"
+    },
+    {
+      "id": "build",
+      "lead": "builder",
+      "required_artifacts": [
+        "feature_pr",
+        "model_registry.md",
+        "tool_registry.md"
+      ],
+      "evidence": [
+        "model/prompt version",
+        "real integration tests"
+      ],
+      "gate": "BUILD_CHECKED"
+    },
+    {
+      "id": "verify",
+      "lead": "evaluator",
+      "required_artifacts": [
+        "golden_set.jsonl",
+        "eval_run.json",
+        "evidence_index.json"
+      ],
+      "evidence": [
+        "ground-truth task checks",
+        "RAG grounding",
+        "tool outcomes",
+        "injection tests"
+      ],
+      "gate": "EVIDENCE_VERIFIED"
+    },
+    {
+      "id": "review",
+      "lead": "reviewer",
+      "required_artifacts": [
+        "review.md",
+        "security_findings.md"
+      ],
+      "evidence": [
+        "independent eval review",
+        "secret/permission assessment"
+      ],
+      "gate": "REVIEW_SIGNED"
+    },
+    {
+      "id": "release",
+      "lead": "delivery_lead",
+      "required_artifacts": [
+        "deployment_plan.md",
+        "rollback.md"
+      ],
+      "evidence": [
+        "staging scorecard",
+        "explicit permission for side effects"
+      ],
+      "gate": "RELEASE_AUTHORIZED"
+    },
+    {
+      "id": "operate",
+      "lead": "ops",
+      "required_artifacts": [
+        "monitoring.md",
+        "cost_report.md"
+      ],
+      "evidence": [
+        "quality drift",
+        "latency, token and tool error metrics"
+      ],
+      "gate": "OPERATIONS_ACCEPTED"
+    },
+    {
+      "id": "improve",
+      "lead": "ops",
+      "required_artifacts": [
+        "change_log.md",
+        "reevaluation.md"
+      ],
+      "evidence": [
+        "model change comparisons",
+        "canary and rollback evidence"
+      ],
+      "gate": "CHANGE_CONTROLLED"
+    }
+  ],
+  "metrics": [
+    "verified_task_success_rate",
+    "unsupported_claim_rate",
+    "tool_error_rate",
+    "permission_incidents",
+    "human_escalation_rate",
+    "cost_per_verified_task",
+    "p95_latency"
+  ],
+  "maintenance": [
+    "weekly evaluation sample and quality drift",
+    "model/prompt/tool version regression",
+    "cost and rate limit monitoring",
+    "prompt-injection incident review"
+  ],
+  "standards": [
+    "NIST AI RMF",
+    "NIST GenAI Profile",
+    "OWASP Agentic Top 10 2026"
+  ],
+  "execution": {
+    "default_concurrency": 2,
+    "requires_isolated_worktrees": true,
+    "requires_independent_release_approval": true,
+    "client_data_isolation": true,
+    "model_tool_calls_untrusted": true
+  }
+}

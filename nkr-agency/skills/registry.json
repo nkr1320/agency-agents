@@ -1,0 +1,612 @@
+{
+  "schema_version": 1,
+  "scope": "NKR Enterprise Agency OS pilot skills",
+  "caution": "Discovery is NOT approval; license, security and benchmark status are unverified. No production activation is authorized by this registry.",
+  "promotion_states": [
+    "DISCOVERED",
+    "PROVENANCE_VERIFIED",
+    "SANDBOXED",
+    "BENCHMARKED",
+    "APPROVED",
+    "PILOT",
+    "GENERAL",
+    "DEPRECATED",
+    "REVOKED"
+  ],
+  "skills": [
+    {
+      "id": "ROLE-PROJECT-MANAGEMENT-PROJECT-MANAGER-SENIOR",
+      "kind": "role_instruction",
+      "name": "project-manager-senior",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "project-management/project-manager-senior.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website",
+        "agents",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-PRODUCT-PRODUCT-TREND-RESEARCHER",
+      "kind": "role_instruction",
+      "name": "product-trend-researcher",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "product/product-trend-researcher.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website",
+        "agents"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-DESIGN-DESIGN-UX-ARCHITECT",
+      "kind": "role_instruction",
+      "name": "design-ux-architect",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "design/design-ux-architect.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-SOFTWARE-ARCHITECT",
+      "kind": "role_instruction",
+      "name": "engineering-software-architect",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-software-architect.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-FRONTEND-DEVELOPER",
+      "kind": "role_instruction",
+      "name": "engineering-frontend-developer",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-frontend-developer.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-BACKEND-ARCHITECT",
+      "kind": "role_instruction",
+      "name": "engineering-backend-architect",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-backend-architect.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-TESTING-TESTING-TEST-AUTOMATION-ENGINEER",
+      "kind": "role_instruction",
+      "name": "testing-test-automation-engineer",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "testing/testing-test-automation-engineer.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-TESTING-TESTING-EVIDENCE-COLLECTOR",
+      "kind": "role_instruction",
+      "name": "testing-evidence-collector",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "testing/testing-evidence-collector.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website",
+        "agents",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-CODE-REVIEWER",
+      "kind": "role_instruction",
+      "name": "engineering-code-reviewer",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-code-reviewer.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website",
+        "agents",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-SECURITY-SECURITY-APPSEC-ENGINEER",
+      "kind": "role_instruction",
+      "name": "security-appsec-engineer",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "security/security-appsec-engineer.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-DEVOPS-AUTOMATOR",
+      "kind": "role_instruction",
+      "name": "engineering-devops-automator",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-devops-automator.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-SRE",
+      "kind": "role_instruction",
+      "name": "engineering-sre",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-sre.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "website",
+        "agents",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-MULTI-AGENT-SYSTEMS-ARCHITECT",
+      "kind": "role_instruction",
+      "name": "engineering-multi-agent-systems-architect",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-multi-agent-systems-architect.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "agents"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-PROMPT-ENGINEER",
+      "kind": "role_instruction",
+      "name": "engineering-prompt-engineer",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-prompt-engineer.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "agents"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-AI-ENGINEER",
+      "kind": "role_instruction",
+      "name": "engineering-ai-engineer",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-ai-engineer.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "agents"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-RAG-PIPELINE-ENGINEER",
+      "kind": "role_instruction",
+      "name": "engineering-rag-pipeline-engineer",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-rag-pipeline-engineer.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "agents"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-API-PLATFORM-ENGINEER",
+      "kind": "role_instruction",
+      "name": "engineering-api-platform-engineer",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-api-platform-engineer.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "agents",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-TESTING-TESTING-TEST-RESULTS-ANALYZER",
+      "kind": "role_instruction",
+      "name": "testing-test-results-analyzer",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "testing/testing-test-results-analyzer.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "agents"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-PRIVACY-ENGINEER",
+      "kind": "role_instruction",
+      "name": "engineering-privacy-engineer",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-privacy-engineer.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "agents"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-SECURITY-SECURITY-AI-GENERATED-CODE-AUDITOR",
+      "kind": "role_instruction",
+      "name": "security-ai-generated-code-auditor",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "security/security-ai-generated-code-auditor.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "agents"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-PRODUCT-PRODUCT-MANAGER",
+      "kind": "role_instruction",
+      "name": "product-manager",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "product/product-manager.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-MOBILE-APP-BUILDER",
+      "kind": "role_instruction",
+      "name": "engineering-mobile-app-builder",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-mobile-app-builder.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "ROLE-ENGINEERING-ENGINEERING-MOBILE-RELEASE-ENGINEER",
+      "kind": "role_instruction",
+      "name": "engineering-mobile-release-engineer",
+      "source": "https://github.com/nkr1320/agency-agents",
+      "path": "engineering/engineering-mobile-release-engineer.md",
+      "source_commit": "b859c515d813efcfc4755d3471dd9e7686c7706d",
+      "teams": [
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "TOOL-ECC",
+      "kind": "tool_candidate",
+      "name": "ECC",
+      "source": "https://github.com/nkr1320/ECC",
+      "path": null,
+      "source_commit": null,
+      "teams": [
+        "website",
+        "agents",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "TOOL-AGENT-SKILLS",
+      "kind": "tool_candidate",
+      "name": "AGENT-SKILLS",
+      "source": "https://github.com/nkr1320/nkr-agent-skills",
+      "path": null,
+      "source_commit": null,
+      "teams": [
+        "website",
+        "agents",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "TOOL-PLAYWRIGHT-MCP",
+      "kind": "tool_candidate",
+      "name": "PLAYWRIGHT-MCP",
+      "source": "https://github.com/nkr1320/nkr-playwright-mcp",
+      "path": null,
+      "source_commit": null,
+      "teams": [
+        "website"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "TOOL-PROMPTFOO",
+      "kind": "tool_candidate",
+      "name": "PROMPTFOO",
+      "source": "https://github.com/nkr1320/nkr-agent-evals",
+      "path": null,
+      "source_commit": null,
+      "teams": [
+        "agents"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "TOOL-ORCHESTRATOR",
+      "kind": "tool_candidate",
+      "name": "ORCHESTRATOR",
+      "source": "https://github.com/nkr1320/nkr-agent-orchestrator",
+      "path": null,
+      "source_commit": null,
+      "teams": [
+        "website",
+        "agents",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "TOOL-OPENHANDS",
+      "kind": "tool_candidate",
+      "name": "OPENHANDS",
+      "source": "https://github.com/nkr1320/nkr-agent-canvas",
+      "path": null,
+      "source_commit": null,
+      "teams": [
+        "website",
+        "agents",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    },
+    {
+      "id": "TOOL-PAPERCLIP",
+      "kind": "tool_candidate",
+      "name": "PAPERCLIP",
+      "source": "https://github.com/nkr1320/nkr-paperclip",
+      "path": null,
+      "source_commit": null,
+      "teams": [
+        "website",
+        "agents",
+        "app"
+      ],
+      "state": "DISCOVERED",
+      "license_review_status": "NOT_RUN",
+      "security_review_status": "NOT_RUN",
+      "benchmark_status": "NOT_RUN",
+      "production_allowed": false,
+      "owner": "UNASSIGNED",
+      "last_reviewed_at": null,
+      "rollback_version": null
+    }
+  ]
+}

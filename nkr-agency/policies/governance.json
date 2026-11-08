@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "framework": "NKR Enterprise Agency OS v1",
+  "owners": {
+    "executive": "Owner or delegated authorized human",
+    "division": "Named delivery lead",
+    "quality": "Independent reviewer",
+    "security": "Security authority",
+    "release": "Authorized human release owner"
+  },
+  "required_phase_ids": [
+    "intake",
+    "research",
+    "architecture",
+    "design",
+    "build",
+    "verify",
+    "review",
+    "release",
+    "operate",
+    "improve"
+  ],
+  "required_gates": [
+    "SCOPE_APPROVED",
+    "RESEARCH_REVIEWED",
+    "ARCHITECTURE_REVIEWED",
+    "DESIGN_APPROVED",
+    "BUILD_CHECKED",
+    "EVIDENCE_VERIFIED",
+    "REVIEW_SIGNED",
+    "RELEASE_AUTHORIZED",
+    "OPERATIONS_ACCEPTED",
+    "CHANGE_CONTROLLED"
+  ],
+  "risk_tiers": [
+    {
+      "id": "R0",
+      "name": "public low impact",
+      "min_approvals": 1,
+      "security_review": "baseline",
+      "release": "human approval initially"
+    },
+    {
+      "id": "R1",
+      "name": "internal or limited client impact",
+      "min_approvals": 1,
+      "security_review": "required risk review",
+      "release": "authorized delivery lead"
+    },
+    {
+      "id": "R2",
+      "name": "customer data or material outage risk",
+      "min_approvals": 2,
+      "security_review": "independent security review",
+      "release": "human client/owner approval"
+    },
+    {
+      "id": "R3",
+      "name": "sensitive data, money, production-wide change or autonomous external writes",
+      "min_approvals": 2,
+      "security_review": "independent security and privacy review",
+      "release": "explicit accountable owner approval; additional domain/legal review where applicable"
+    }
+  ],
+  "controls": [
+    {
+      "id": "GOV-01",
+      "name": "identified owner",
+      "evidence": "DRI and accountable human"
+    },
+    {
+      "id": "GOV-02",
+      "name": "verified authorization",
+      "evidence": "written customer/platform scope"
+    },
+    {
+      "id": "GOV-03",
+      "name": "data classification",
+      "evidence": "data inventory, retention and isolation"
+    },
+    {
+      "id": "GOV-04",
+      "name": "least privilege",
+      "evidence": "tool and service principal allowlist"
+    },
+    {
+      "id": "GOV-05",
+      "name": "change traceability",
+      "evidence": "ticket, branch/PR and reviewed SHA"
+    },
+    {
+      "id": "GOV-06",
+      "name": "test evidence",
+      "evidence": "actual run logs with pass/fail/blocked/not-run"
+    },
+    {
+      "id": "GOV-07",
+      "name": "security review",
+      "evidence": "risk-tier appropriate findings and decision"
+    },
+    {
+      "id": "GOV-08",
+      "name": "release authorization",
+      "evidence": "separate owner approval and rollout record"
+    },
+    {
+      "id": "GOV-09",
+      "name": "operations readiness",
+      "evidence": "SLO, on-call/owner, backup and rollback"
+    },
+    {
+      "id": "GOV-10",
+      "name": "cost boundaries",
+      "evidence": "token/cloud budget and stop conditions"
+    },
+    {
+      "id": "GOV-11",
+      "name": "skill supply-chain",
+      "evidence": "version/license/source provenance and trial results"
+    },
+    {
+      "id": "GOV-12",
+      "name": "incident response",
+      "evidence": "severity, escalation, postmortem and tracking"
+    }
+  ],
+  "status_vocabulary": [
+    "NOT_STARTED",
+    "ACTIVE",
+    "BLOCKED",
+    "FAILED",
+    "READY_FOR_REVIEW",
+    "APPROVED",
+    "RELEASED",
+    "RETIRED"
+  ],
+  "dangerous_actions": [
+    "production deployment",
+    "production data mutation",
+    "payment or purchase",
+    "outbound message or publishing",
+    "client account permission change",
+    "signing or app-store release",
+    "secret access expansion",
+    "destructive scripts"
+  ],
+  "release_policy": "No autonomous production release; approval must be confirmed by a named authorized human. A generated status is not approval.",
+  "default_budgets": {
+    "concurrent_workers_per_job": 2,
+    "mandatory_cost_cap": true,
+    "hard_stop_on_expiry": true
+  },
+  "compliance_note": "Standards references guide a planned control system; they are not certifications, audits or proof of implementation."
+}

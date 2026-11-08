@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "id": "app",
+  "name": "NKR App Division",
+  "focus": "Android/iOS/cross-platform apps; design, QA, store delivery, maintenance",
+  "roles": [
+    {
+      "id": "delivery_lead",
+      "skill_ref": "project-management/project-manager-senior.md",
+      "responsibility": "project ownership and commitments"
+    },
+    {
+      "id": "research",
+      "skill_ref": "product/product-manager.md",
+      "responsibility": "platform and feature research"
+    },
+    {
+      "id": "ux",
+      "skill_ref": "design/design-ux-architect.md",
+      "responsibility": "mobile screen states and navigation"
+    },
+    {
+      "id": "architect",
+      "skill_ref": "engineering/engineering-software-architect.md",
+      "responsibility": "mobile and backend architecture"
+    },
+    {
+      "id": "mobile",
+      "skill_ref": "engineering/engineering-mobile-app-builder.md",
+      "responsibility": "Kotlin/Swift/Flutter/React Native as selected"
+    },
+    {
+      "id": "backend",
+      "skill_ref": "engineering/engineering-api-platform-engineer.md",
+      "responsibility": "mobile service contracts"
+    },
+    {
+      "id": "qa",
+      "skill_ref": "testing/testing-test-automation-engineer.md",
+      "responsibility": "unit, integration and device QA"
+    },
+    {
+      "id": "evidence",
+      "skill_ref": "testing/testing-evidence-collector.md",
+      "responsibility": "device logs, screenshots and reproduction"
+    },
+    {
+      "id": "reviewer",
+      "skill_ref": "engineering/engineering-code-reviewer.md",
+      "responsibility": "independent source review"
+    },
+    {
+      "id": "security",
+      "skill_ref": "security/security-appsec-engineer.md",
+      "responsibility": "mobile security and privacy reviews"
+    },
+    {
+      "id": "release",
+      "skill_ref": "engineering/engineering-mobile-release-engineer.md",
+      "responsibility": "signing, store submission and phased rollouts"
+    },
+    {
+      "id": "ops",
+      "skill_ref": "engineering/engineering-sre.md",
+      "responsibility": "crash monitoring, support and incident response"
+    }
+  ],
+  "phases": [
+    {
+      "id": "intake",
+      "lead": "delivery_lead",
+      "required_artifacts": [
+        "scope.md",
+        "platform_targets.md"
+      ],
+      "evidence": [
+        "app ownership",
+        "package IDs and publisher approval"
+      ],
+      "gate": "SCOPE_APPROVED"
+    },
+    {
+      "id": "research",
+      "lead": "research",
+      "required_artifacts": [
+        "product_discovery.md"
+      ],
+      "evidence": [
+        "target OS/device distributions",
+        "business requirements"
+      ],
+      "gate": "RESEARCH_REVIEWED"
+    },
+    {
+      "id": "architecture",
+      "lead": "architect",
+      "required_artifacts": [
+        "architecture.md",
+        "adr.md",
+        "risk_register.md"
+      ],
+      "evidence": [
+        "permissions",
+        "offline and data flow"
+      ],
+      "gate": "ARCHITECTURE_REVIEWED"
+    },
+    {
+      "id": "design",
+      "lead": "ux",
+      "required_artifacts": [
+        "screen_inventory.md",
+        "design_spec.md"
+      ],
+      "evidence": [
+        "loading/error/offline/permission denial states"
+      ],
+      "gate": "DESIGN_APPROVED"
+    },
+    {
+      "id": "build",
+      "lead": "mobile",
+      "required_artifacts": [
+        "feature_pr",
+        "build_manifest.json"
+      ],
+      "evidence": [
+        "real CI compile",
+        "signed-off integration contracts"
+      ],
+      "gate": "BUILD_CHECKED"
+    },
+    {
+      "id": "verify",
+      "lead": "qa",
+      "required_artifacts": [
+        "device_matrix.md",
+        "qa_report.md",
+        "evidence_index.json"
+      ],
+      "evidence": [
+        "actual emulator/physical device tests",
+        "API and upgrade checks"
+      ],
+      "gate": "EVIDENCE_VERIFIED"
+    },
+    {
+      "id": "review",
+      "lead": "reviewer",
+      "required_artifacts": [
+        "review.md",
+        "security_findings.md"
+      ],
+      "evidence": [
+        "independent code and privacy review",
+        "device regression results"
+      ],
+      "gate": "REVIEW_SIGNED"
+    },
+    {
+      "id": "release",
+      "lead": "release",
+      "required_artifacts": [
+        "release_manifest.md",
+        "signing_plan.md"
+      ],
+      "evidence": [
+        "build checksum",
+        "store metadata",
+        "owner-controlled submission"
+      ],
+      "gate": "RELEASE_AUTHORIZED"
+    },
+    {
+      "id": "operate",
+      "lead": "ops",
+      "required_artifacts": [
+        "crash_runbook.md",
+        "support_metrics.md"
+      ],
+      "evidence": [
+        "crash/ANR signals",
+        "rollback/forward-fix readiness"
+      ],
+      "gate": "OPERATIONS_ACCEPTED"
+    },
+    {
+      "id": "improve",
+      "lead": "ops",
+      "required_artifacts": [
+        "compatibility_plan.md",
+        "maintenance_backlog.md"
+      ],
+      "evidence": [
+        "new OS version tests",
+        "user feedback and regression evidence"
+      ],
+      "gate": "CHANGE_CONTROLLED"
+    }
+  ],
+  "metrics": [
+    "crash_free_session_rate",
+    "anr_rate",
+    "critical_journey_pass_rate",
+    "store_review_rejection_rate",
+    "post_release_regressions",
+    "patch_lead_time",
+    "gross_margin"
+  ],
+  "maintenance": [
+    "OS and SDK compatibility reviews",
+    "crash/ANR and permissions",
+    "dependency/security updates",
+    "store policy and privacy updates"
+  ],
+  "standards": [
+    "OWASP MASVS",
+    "platform store rules",
+    "DORA delivery metrics"
+  ],
+  "execution": {
+    "default_concurrency": 2,
+    "requires_isolated_worktrees": true,
+    "requires_independent_release_approval": true,
+    "client_data_isolation": true,
+    "model_tool_calls_untrusted": true
+  }
+}
