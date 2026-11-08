@@ -73,6 +73,10 @@ test("missing role skill rejected",()=>{
 test("deterministic repeated output",()=>{
   assert.deepEqual(run(["mcp-401","mcp-403"],"build"),run(["mcp-401","mcp-403"],"build"));
 });
+test("Enterprise OS architecture and improve phase aliases work",()=>{
+ assert.ok(run(["ambiguous-requirement"],"architecture").hints.some(h=>h.id==="MAST-2.2"));
+ assert.ok(run(["budget-exceeded"],"improve").hints.some(h=>h.id==="PDF-F16"));
+});
 test("default bound is compact",()=>{
   const result=run(["mcp-401","mcp-403"],"build");
   assert.ok(JSON.stringify(result).length<=LIMITS.defaultChars);
